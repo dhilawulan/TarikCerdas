@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Soal</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .btn-cancel {
+            background-color: #ddd;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-cancel:hover {
+            background-color: #ccc;
+        }
+
+        .btn-save {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-save:hover {
+            background-color: #45a049;
+        }
+
+        .question-card-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px 12px;
+            margin: 0 5px;
+            color: #666;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .question-card-actions button:hover {
+            color: #4CAF50;
+        }
+
+        .question-card-actions button.delete:hover {
+            color: #f44336;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="kelola-soal-wrapper">
+        <div class="kelola-soal-container">
+            <div class="kelola-soal-header">
+                <div>
+                    <h1>Kelola Soal</h1>
+                    <p>Soal bank soal akan muncul di halaman ini sesuai kategori kelas.</p>
+                </div>
+                <div class="kelola-soal-actions">
+                    <button id="addQuestionBtn" class="btn-primary">
+                        <i class="fas fa-plus"></i> Buat Pertanyaan
+                    </button>
+                    <button id="refreshBtn" class="btn-primary">
+                        <i class="fas fa-sync-alt"></i> Muat Ulang
+                    </button>
+                </div>
+            </div>
+
+            <div class="kelola-soal-summary">
+                <div class="summary-card">
+                    <small>Kategori Kelas</small>
+                    <strong id="selectedLevelText">Low</strong>
+                </div>
+                <div class="summary-card">
+                    <small>Total Soal Bank</small>
+                    <strong id="totalQuestions">0</strong>
+                </div>
+                <div class="summary-card">
+                    <small>Soal per Tim</small>
+                    <strong id="questionsPerTeam">0</strong>
+                </div>
+            </div>
+
+            <div id="questionList" class="question-list"></div>
+
+            <div class="form-footer" style="margin-top: 28px;">
+                <a href="/dashboard" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit Soal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Pertanyaan</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="alertContainer"></div>
+            <form id="editForm">
+                <div class="form-group">
+                    <label for="editPertanyaan">Pertanyaan *</label>
+                    <textarea id="editPertanyaan" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editOpsiA">Opsi A *</label>
+                        <input type="text" id="editOpsiA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editOpsiB">Opsi B *</label>
+                        <input type="text" id="editOpsiB" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editOpsiC">Opsi C *</label>
+                        <input type="text" id="editOpsiC" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editOpsiD">Opsi D *</label>
+                        <input type="text" id="editOpsiD" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editJawaban">Jawaban Benar *</label>
+                    <select id="editJawaban" required>
+                        <option value="">Pilih jawaban benar</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editKategori">Kategori Kelas *</label>
+                    <select id="editKategori" required>
+                        <option value="low">Low</option>
+                        <option value="middle">Middle</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn-save">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/kelola-soal.js"></script>
+</body>
+</html>

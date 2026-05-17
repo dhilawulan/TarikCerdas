@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game - Middle Level</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="class-game-wrapper">
+        <!-- GAME MODE VIEW -->
+        <div class="class-game-container" id="gameContainer" style="display: flex; flex-direction: column;">
+            <!-- Header with Scores -->
+            <div class="class-game-header">
+                <div class="scores-display">
+                    <div class="score-team">
+                        <h3>Skor Tim 1</h3>
+                        <div class="score-value" id="scoreTeam1">0</div>
+                    </div>
+                    <h1>Middle Level</h1>
+                    <div class="score-team">
+                        <h3>Skor Tim 2</h3>
+                        <div class="score-value" id="scoreTeam2">0</div>
+                    </div>
+                </div>
+                <p>Jawab soal ini untuk menarik tambang</p>
+            </div>
+
+            <!-- Rope Game Area -->
+            <div class="rope-area">
+                <div class="rope-wrapper">
+                    <img src="/images/tarik.png" id="rope-img" alt="Tarik Tambang">
+                    <div class="center-line"></div>
+                </div>
+            </div>
+
+            <!-- QR Codes untuk Tim -->
+            <div class="qr-codes-container">
+                <div class="team-qr">
+                    <div class="team-label">
+                        <i class="fas fa-users"></i>
+                        <h3>TIM 1</h3>
+                    </div>
+                    <div class="qr-code-box">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http://localhost:3000/play?team=1%level=middle" alt="QR Code Tim 1">
+                    </div>
+                </div>
+
+                <div class="team-qr">
+                    <div class="team-label">
+                        <i class="fas fa-users"></i>
+                        <h3>TIM 2</h3>
+                    </div>
+                    <div class="qr-code-box">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http://localhost:3000/play?team=2%level=middle" alt="QR Code Tim 2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="class-game-footer">
+                <button id="refreshBtn" class="btn-refresh">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <a href="/kelola-soal?level=middle" class="btn-back-game btn-manage">
+                    <i class="fas fa-pen"></i> Kelola Soal
+                </a>
+                <a href="/dashboard" class="btn-back-game">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- WIN SCREEN - INTEGRATED VIEW -->
+        <div id="winScreen" class="win-screen-integrated" style="display: none;">
+            <div class="confetti-container" id="confetti"></div>
+            
+            <!-- Win Header with Scores -->
+            <div class="win-header">
+                <div class="win-scores-top">
+                    <div class="win-score-column">
+                        <h3>Skor Tim 1</h3>
+                        <p class="win-score-value-top" id="winScoreTeam1Top">0</p>
+                    </div>
+                    <div class="win-title-center">
+                        <h1 id="winTitle">TIM 1 MENANG</h1>
+                    </div>
+                    <div class="win-score-column">
+                        <h3>Skor Tim 2</h3>
+                        <p class="win-score-value-top" id="winScoreTeam2Top">0</p>
+                    </div>
+                </div>
+                <p class="win-level">Middle Level</p>
+                <p class="win-message">Jawab soal ini untuk menang bersama tim mu</p>
+            </div>
+
+            <!-- Rope Game Area with Trophy -->
+            <div class="rope-area">
+                <div class="rope-wrapper">
+                    <img src="/images/tim_1.png" id="rope-img-win" alt="Tarik Tambang" class="rope-img-win">
+                    <div class="center-line"></div>
+                </div>
+            </div>
+
+            <!-- Winner Trophy Display -->
+            <div class="trophy-display">
+                <div class="trophy-icon-large">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="trophy-info">
+                    <p class="trophy-label" id="trophyLabel">SKOR TIM 1</p>
+                    <p class="trophy-score" id="trophyScore">0</p>
+                </div>
+            </div>
+
+            <!-- QR Codes -->
+            <div class="win-qr-codes-container">
+                <div class="win-team-qr">
+                    <h3>TIM 1</h3>
+                    <div class="win-qr-box">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:3000/play?team=1%26level=middle" alt="QR Code Tim 1">
+                    </div>
+                </div>
+                <div class="win-team-qr">
+                    <h3>TIM 2</h3>
+                    <div class="win-qr-box">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:3000/play?team=2%26level=middle" alt="QR Code Tim 2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="win-buttons">
+                <button id="winRefreshBtn" class="btn-win-refresh">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <a href="/dashboard" class="btn-win-back">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set level untuk game.js
+        window.gameLevel = 'middle';
+    </script>
+    <script src="/js/game.js"></script>
+
+</body>
+</html>

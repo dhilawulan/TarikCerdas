@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Soal</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="tambah-soal-wrapper">
+        <div class="tambah-soal-container">
+            <div class="tambah-soal-header">
+                <div class="header-icon">➕</div>
+                <h1>Tambah Soal</h1>
+                <p>Tambahkan soal baru sesuai kategori kelas yang dipilih.</p>
+            </div>
+
+            <form action="/tambah-soal" method="POST" id="tambahSoalForm">
+                <input type="hidden" name="kategori" id="selectedLevel">
+
+                <div class="form-section">
+                    <label for="pertanyaan">Pertanyaan</label>
+                    <textarea name="pertanyaan" id="pertanyaan" placeholder="Tulis soal di sini..." rows="4" required></textarea>
+                </div>
+
+                <div class="form-section">
+                    <label>Opsi Jawaban</label>
+                    <div class="opsi-grid">
+                        <div class="opsi-item">
+                            <div class="opsi-label">A</div>
+                            <input type="text" name="opsiA" placeholder="Option A" required>
+                        </div>
+                        <div class="opsi-item">
+                            <div class="opsi-label">B</div>
+                            <input type="text" name="opsiB" placeholder="Option B" required>
+                        </div>
+                        <div class="opsi-item">
+                            <div class="opsi-label">C</div>
+                            <input type="text" name="opsiC" placeholder="Option C" required>
+                        </div>
+                        <div class="opsi-item">
+                            <div class="opsi-label">D</div>
+                            <input type="text" name="opsiD" placeholder="Option D" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <label for="jawaban">Jawaban Benar</label>
+                    <select name="jawaban" id="jawaban" required>
+                        <option value="">Pilih jawaban benar</option>
+                        <option value="A">Opsi A</option>
+                        <option value="B">Opsi B</option>
+                        <option value="C">Opsi C</option>
+                        <option value="D">Opsi D</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-check"></i> Simpan Soal
+                </button>
+            </form>
+
+            <div class="form-footer">
+                <a href="/kelola-soal" id="backToKelola" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Kelola Soal
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/tambah-soal.js"></script>
+</body>
+</html>

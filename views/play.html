@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bermain - Tarik Tambang</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="play-wrapper">
+        <div class="play-container">
+            <!-- Header -->
+            <div class="play-header">
+                <div class="play-header-info">
+                    <h2 id="levelDisplay">Loading...</h2>
+                    <p id="teamDisplay">Team: -</p>
+                </div>
+                <div class="play-progress">
+                    <span id="questionCount">1/10</span>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal -->
+            <div id="soalContainer" class="soal-container">
+                <div class="soal-box">
+                    <h3 id="pertanyaan" class="pertanyaan-text">Loading...</h3>
+                    
+                    <div class="opsi-buttons">
+                        <button class="opsi-btn" data-opsi="A">
+                            <span class="opsi-letter">A</span>
+                            <span id="opsiA" class="opsi-text">-</span>
+                        </button>
+                        <button class="opsi-btn" data-opsi="B">
+                            <span class="opsi-letter">B</span>
+                            <span id="opsiB" class="opsi-text">-</span>
+                        </button>
+                        <button class="opsi-btn" data-opsi="C">
+                            <span class="opsi-letter">C</span>
+                            <span id="opsiC" class="opsi-text">-</span>
+                        </button>
+                        <button class="opsi-btn" data-opsi="D">
+                            <span class="opsi-letter">D</span>
+                            <span id="opsiD" class="opsi-text">-</span>
+                        </button>
+                    </div>
+
+                    <button id="nextBtn" class="btn-next" style="display: none;">
+                        <i class="fas fa-arrow-right"></i> Soal Berikutnya
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hasil -->
+            <div id="resultsContainer" class="results-container" style="display: none;">
+                <div class="results-box">
+                    <div class="results-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Selesai!</h2>
+                    <p id="resultMessage">Terima kasih telah bermain</p>
+                    <a href="/dashboard" class="btn-back-results">
+                        <i class="fas fa-home"></i> Kembali ke Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/play.js"></script>
+
+</body>
+</html>

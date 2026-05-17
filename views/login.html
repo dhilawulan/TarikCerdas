@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TarikCerdas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <h2>Masuk ke <span>TarikCerdas</span></h2>
+            <p>Silakan login untuk melanjutkan permainan</p>
+
+            <div id="error-box" class="alert-error">
+                Username atau Password salah!
+            </div>
+
+            <form action="/login" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                
+                <div class="helper-text">
+                    <a href="/forgot-password">Lupa Password?</a>
+                </div>
+
+                <button type="submit">Masuk</button>
+            </form>
+
+            <div style="margin-top: 20px; font-size: 14px; color: #ccc;">
+                Belum punya akun? <a href="/register">Daftar</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('error')) {
+                document.getElementById('error-box').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

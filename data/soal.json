@@ -1,0 +1,803 @@
+[
+  {
+    "pertanyaan": "Perangkat keras adalah…",
+    "opsiA": "Program komputer",
+    "opsiB": "Komponen fisik komputer",
+    "opsiC": "Data digital",
+    "opsiD": "Jaringan internet komputer",
+    "jawaban": "Komponen fisik komputer",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Contoh perangkat input adalah…",
+    "opsiA": "Monitor",
+    "opsiB": "Keyboard",
+    "opsiC": "Printer",
+    "opsiD": "Speaker",
+    "jawaban": "Keyboard",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "CPU berfungsi sebagai…",
+    "opsiA": "Penyimpanan data",
+    "opsiB": "Alat input",
+    "opsiC": "Pusat pemrosesan",
+    "opsiD": "Alat output",
+    "jawaban": "Pusat pemrosesan",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Monitor termasuk perangkat…",
+    "opsiA": "Input",
+    "opsiB": "Proses",
+    "opsiC": "Output",
+    "opsiD": "Penyimpanan",
+    "jawaban": "Output",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "RAM berfungsi untuk…",
+    "opsiA": "Menyimpan data sementara",
+    "opsiB": "Menyimpan data permanen",
+    "opsiC": "Menampilkan gambar",
+    "opsiD": "Menghubungkan internet",
+    "jawaban": "Menyimpan data sementara",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "SSD termasuk perangkat…",
+    "opsiA": "Input",
+    "opsiB": "Output",
+    "opsiC": "Penyimpanan",
+    "opsiD": "Proses",
+    "jawaban": "Penyimpanan",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Perangkat lunak adalah…",
+    "opsiA": "Komponen fisik",
+    "opsiB": "Program komputer",
+    "opsiC": "Kabel jaringan",
+    "opsiD": "Monitor",
+    "jawaban": "Program komputer",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Sistem operasi berfungsi untuk…",
+    "opsiA": "Menggambar",
+    "opsiB": "Menghubungkan pengguna dan hardware",
+    "opsiC": "Menyimpan data",
+    "opsiD": "Menghapus file",
+    "jawaban": "Menghubungkan pengguna dan hardware",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Contoh sistem operasi adalah…",
+    "opsiA": "Microsoft Word",
+    "opsiB": "Windows",
+    "opsiC": "Excel",
+    "opsiD": "Canva",
+    "jawaban": "Windows",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Aplikasi digunakan untuk…",
+    "opsiA": "Mengatur hardware",
+    "opsiB": "Membantu pekerjaan pengguna",
+    "opsiC": "Menghidupkan komputer",
+    "opsiD": "Menyimpan listrik",
+    "jawaban": "Membantu pekerjaan pengguna",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Bluetooth digunakan untuk…",
+    "opsiA": "Menampilkan gambar",
+    "opsiB": "Transfer data jarak dekat",
+    "opsiC": "Menyimpan file",
+    "opsiD": "Mengolah data",
+    "jawaban": "Transfer data jarak dekat",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Wi-Fi digunakan untuk…",
+    "opsiA": "Menghubungkan jaringan internet",
+    "opsiB": "Menyimpan file",
+    "opsiC": "Mengedit video",
+    "opsiD": "Menggambar",
+    "jawaban": "Menghubungkan jaringan internet",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Overheating berarti…",
+    "opsiA": "Komputer mati total",
+    "opsiB": "Komputer terlalu panas",
+    "opsiC": "Komputer lambat",
+    "opsiD": "Layar mati",
+    "jawaban": "Komputer terlalu panas",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Sistem bilangan biner terdiri dari…",
+    "opsiA": "0 dan 1",
+    "opsiB": "1 dan 2",
+    "opsiC": "0–9",
+    "opsiD": "Huruf",
+    "jawaban": "0 dan 1",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Bilangan biner digunakan oleh…",
+    "opsiA": "Manusia",
+    "opsiB": "Komputer",
+    "opsiC": "Printer",
+    "opsiD": "Buku",
+    "jawaban": "Komputer",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Keyboard berfungsi untuk…",
+    "opsiA": "Menampilkan data",
+    "opsiB": "Memasukkan data",
+    "opsiC": "Menyimpan data",
+    "opsiD": "Menghapus data",
+    "jawaban": "Memasukkan data",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Printer termasuk perangkat…",
+    "opsiA": "Input",
+    "opsiB": "Output",
+    "opsiC": "Proses",
+    "opsiD": "Penyimpanan",
+    "jawaban": "Output",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Hard disk berfungsi untuk…",
+    "opsiA": "Input data",
+    "opsiB": "Output data",
+    "opsiC": "Penyimpanan data",
+    "opsiD": "Memproses data",
+    "jawaban": "Penyimpanan data",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Contoh aplikasi adalah…",
+    "opsiA": "Windows",
+    "opsiB": "Linux",
+    "opsiC": "Microsoft Word",
+    "opsiD": "BIOS",
+    "jawaban": "Microsoft Word",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Closed source berarti…",
+    "opsiA": "Bebas digunakan",
+    "opsiB": "Tidak memiliki lisensi",
+    "opsiC": "Kode tertutup",
+    "opsiD": "Gratis",
+    "jawaban": "Kode tertutup",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Open source berarti…",
+    "opsiA": "Berbayar",
+    "opsiB": "Kode terbuka",
+    "opsiC": "Tidak bisa diubah",
+    "opsiD": "Tidak gratis",
+    "jawaban": "Kode terbuka",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "File adalah…",
+    "opsiA": "Perangkat keras",
+    "opsiB": "Data digital",
+    "opsiC": "Kabel",
+    "opsiD": "Software",
+    "jawaban": "Data digital",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Speaker berfungsi untuk…",
+    "opsiA": "Input suara",
+    "opsiB": "Output suara",
+    "opsiC": "Menyimpan suara",
+    "opsiD": "Memproses suara",
+    "jawaban": "Output suara",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Mouse digunakan untuk…",
+    "opsiA": "Mengetik",
+    "opsiB": "Menggerakkan kursor",
+    "opsiC": "Menyimpan data",
+    "opsiD": "Memproses data",
+    "jawaban": "Menggerakkan kursor",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Laptop termasuk…",
+    "opsiA": "Software",
+    "opsiB": "Hardware",
+    "opsiC": "Data",
+    "opsiD": "Jaringan",
+    "jawaban": "Hardware",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Jaringan digunakan untuk…",
+    "opsiA": "Menggambar",
+    "opsiB": "Berkomunikasi antar perangkat",
+    "opsiC": "Menyimpan data",
+    "opsiD": "Menghapus file",
+    "jawaban": "Berkomunikasi antar perangkat",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Data digital dapat berupa…",
+    "opsiA": "Gambar",
+    "opsiB": "Teks",
+    "opsiC": "Suara",
+    "opsiD": "Semua benar",
+    "jawaban": "Semua benar",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "CPU singkatan dari…",
+    "opsiA": "Central Process Unit",
+    "opsiB": "Central Processing Unit",
+    "opsiC": "Computer Personal Unit",
+    "opsiD": "Control Program Unit",
+    "jawaban": "Central Processing Unit",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Smartphone termasuk perangkat…",
+    "opsiA": "Input saja",
+    "opsiB": "Output saja",
+    "opsiC": "Sistem komputer",
+    "opsiD": "Penyimpanan saja",
+    "jawaban": "Sistem komputer",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Komputer digunakan untuk…",
+    "opsiA": "Mengolah data",
+    "opsiB": "Memasak",
+    "opsiC": "Mencuci",
+    "opsiD": "Menjahit",
+    "jawaban": "Mengolah data",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "sapi makan apa",
+    "opsiA": "rumput",
+    "opsiB": "soto",
+    "opsiC": "daging",
+    "opsiD": "Mouse",
+    "jawaban": "rumput",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "Jika keyboard rusak, maka…",
+    "opsiA": "Tidak bisa mengetik",
+    "opsiB": "Tidak bisa melihat",
+    "opsiC": "Tidak bisa mendengar",
+    "opsiD": "Tidak bisa menyimpan",
+    "jawaban": "Tidak bisa mengetik",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Jika monitor mati, maka…",
+    "opsiA": "Tidak bisa input",
+    "opsiB": "Tidak bisa melihat output",
+    "opsiC": "Tidak bisa menyimpan",
+    "opsiD": "Tidak bisa memproses",
+    "jawaban": "Tidak bisa melihat output",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Komputer lambat bisa disebabkan oleh…",
+    "opsiA": "RAM kecil",
+    "opsiB": "Layar besar",
+    "opsiC": "Keyboard bagus",
+    "opsiD": "Mouse baru",
+    "jawaban": "RAM kecil",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Software dan hardware saling…",
+    "opsiA": "Terpisah",
+    "opsiB": "Tidak berhubungan",
+    "opsiC": "Bergantung",
+    "opsiD": "Tidak penting",
+    "jawaban": "Bergantung",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Mengapa OS penting?",
+    "opsiA": "Untuk desain",
+    "opsiB": "Mengatur sistem",
+    "opsiC": "Menyimpan data",
+    "opsiD": "Menggambar",
+    "jawaban": "Mengatur sistem",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Transfer file besar lebih lambat karena…",
+    "opsiA": "Ukuran file",
+    "opsiB": "Warna file",
+    "opsiC": "Nama file",
+    "opsiD": "Jenis file",
+    "jawaban": "Ukuran file",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Printer tidak bisa bekerja tanpa…",
+    "opsiA": "CPU",
+    "opsiB": "Software",
+    "opsiC": "Listrik",
+    "opsiD": "Semua benar",
+    "jawaban": "Semua benar",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Smartphone termasuk sistem karena…",
+    "opsiA": "Banyak warna",
+    "opsiB": "Banyak aplikasi",
+    "opsiC": "Terdiri dari hardware dan software",
+    "opsiD": "Mahal",
+    "jawaban": "Terdiri dari hardware dan software",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Jika baterai rusak maka…",
+    "opsiA": "Tidak bisa menyala tanpa charger",
+    "opsiB": "Tidak bisa mengetik",
+    "opsiC": "Tidak bisa melihat",
+    "opsiD": "Tidak bisa menyimpan",
+    "jawaban": "Tidak bisa menyala tanpa charger",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Open source lebih fleksibel karena…",
+    "opsiA": "Mahal",
+    "opsiB": "Kode bisa diubah",
+    "opsiC": "Tidak bisa dipakai",
+    "opsiD": "Terbatas",
+    "jawaban": "Kode bisa diubah",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Closed source biasanya…",
+    "opsiA": "Bebas diubah",
+    "opsiB": "Terbatas akses",
+    "opsiC": "Gratis",
+    "opsiD": "Tidak digunakan",
+    "jawaban": "Terbatas akses",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Sistem biner penting karena…",
+    "opsiA": "Mudah dibaca manusia",
+    "opsiB": "Digunakan komputer",
+    "opsiC": "Banyak angka",
+    "opsiD": "Kompleks",
+    "jawaban": "Digunakan komputer",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Data teks disimpan dalam bentuk…",
+    "opsiA": "Warna",
+    "opsiB": "Suara",
+    "opsiC": "Biner",
+    "opsiD": "Gambar",
+    "jawaban": "Biner",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Jika Wi-Fi lambat maka…",
+    "opsiA": "CPU rusak",
+    "opsiB": "Koneksi lemah",
+    "opsiC": "RAM rusak",
+    "opsiD": "Monitor mati",
+    "jawaban": "Koneksi lemah",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "CCTV lebih efisien karena…",
+    "opsiA": "Mahal",
+    "opsiB": "Otomatis",
+    "opsiC": "Manual",
+    "opsiD": "Lambat",
+    "jawaban": "Otomatis",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Transfer manual lebih lambat karena…",
+    "opsiA": "Banyak tenaga manusia",
+    "opsiB": "Cepat",
+    "opsiC": "Praktis",
+    "opsiD": "Modern",
+    "jawaban": "Banyak tenaga manusia",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Perangkat output berfungsi untuk…",
+    "opsiA": "Memasukkan data",
+    "opsiB": "Menampilkan data",
+    "opsiC": "Menyimpan data",
+    "opsiD": "Memproses data",
+    "jawaban": "Menampilkan data",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Jika storage penuh maka…",
+    "opsiA": "Komputer cepat",
+    "opsiB": "Tidak bisa simpan data",
+    "opsiC": "Tidak bisa melihat",
+    "opsiD": "Tidak bisa mengetik",
+    "jawaban": "Tidak bisa simpan data",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "RAM mempengaruhi…",
+    "opsiA": "Tampilan",
+    "opsiB": "Kecepatan",
+    "opsiC": "Warna",
+    "opsiD": "Bentuk",
+    "jawaban": "Kecepatan",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "CPU memproses…",
+    "opsiA": "Data",
+    "opsiB": "Listrik",
+    "opsiC": "Kabel",
+    "opsiD": "Monitor",
+    "jawaban": "Data",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Jika file tidak terkirim via Bluetooth, kemungkinan…",
+    "opsiA": "Jarak jauh",
+    "opsiB": "CPU rusak",
+    "opsiC": "RAM besar",
+    "opsiD": "Monitor mati",
+    "jawaban": "Jarak jauh",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Aplikasi TikTok termasuk…",
+    "opsiA": "OS",
+    "opsiB": "Aplikasi",
+    "opsiC": "Hardware",
+    "opsiD": "Driver",
+    "jawaban": "Aplikasi",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Sistem komputer terdiri dari…",
+    "opsiA": "Hardware saja",
+    "opsiB": "Software saja",
+    "opsiC": "Hardware, software, user",
+    "opsiD": "Monitor saja",
+    "jawaban": "Hardware, software, user",
+    "level": "middle"
+  },
+  {
+    "pertanyaan": "Kamu ingin editing video, spesifikasi terbaik adalah…",
+    "opsiA": "RAM kecil",
+    "opsiB": "CPU cepat & RAM besar",
+    "opsiC": "Storage kecil",
+    "opsiD": "Tanpa GPU",
+    "jawaban": "CPU cepat & RAM besar",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Pilihan terbaik untuk sekolah adalah…",
+    "opsiA": "Gaming PC mahal",
+    "opsiB": "Laptop sesuai kebutuhan",
+    "opsiC": "Server",
+    "opsiD": "Supercomputer",
+    "jawaban": "Laptop sesuai kebutuhan",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika komputer sering panas, solusi terbaik…",
+    "opsiA": "Tambah aplikasi",
+    "opsiB": "Perbaiki sistem pendingin",
+    "opsiC": "Tambah file",
+    "opsiD": "Ganti keyboard",
+    "jawaban": "Perbaiki sistem pendingin",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Mengapa memilih SSD?",
+    "opsiA": "Murah",
+    "opsiB": "Cepat dan efisien",
+    "opsiC": "Berat",
+    "opsiD": "Besar",
+    "jawaban": "Cepat dan efisien",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Evaluasi: PC lambat → solusi terbaik?",
+    "opsiA": "Ganti mouse",
+    "opsiB": "Tambah RAM",
+    "opsiC": "Ganti layar",
+    "opsiD": "Tambah speaker",
+    "jawaban": "Tambah RAM",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Mana yang lebih efisien?",
+    "opsiA": "Catatan manual",
+    "opsiB": "CCTV otomatis",
+    "opsiC": "Buku tulis",
+    "opsiD": "Poster",
+    "jawaban": "CCTV otomatis",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Mengapa sistem komputer penting?",
+    "opsiA": "Hiburan saja",
+    "opsiB": "Membantu pekerjaan manusia",
+    "opsiC": "Mahal",
+    "opsiD": "Sulit",
+    "jawaban": "Membantu pekerjaan manusia",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Kamu memilih software open source karena…",
+    "opsiA": "Mahal",
+    "opsiB": "Bisa dimodifikasi",
+    "opsiC": "Terbatas",
+    "opsiD": "Tidak berguna",
+    "jawaban": "Bisa dimodifikasi",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika jaringan lambat, solusi…",
+    "opsiA": "Ganti CPU",
+    "opsiB": "Perbaiki koneksi",
+    "opsiC": "Ganti RAM",
+    "opsiD": "Ganti keyboard",
+    "jawaban": "Perbaiki koneksi",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Perangkat paling penting untuk desain grafis…",
+    "opsiA": "Mouse",
+    "opsiB": "GPU & RAM",
+    "opsiC": "Speaker",
+    "opsiD": "Printer",
+    "jawaban": "GPU & RAM",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Mana lebih hemat?",
+    "opsiA": "Beli mahal tanpa kebutuhan",
+    "opsiB": "Sesuai kebutuhan",
+    "opsiC": "Termahal",
+    "opsiD": "Terbesar",
+    "jawaban": "Sesuai kebutuhan",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika ingin multitasking…",
+    "opsiA": "RAM besar",
+    "opsiB": "RAM kecil",
+    "opsiC": "Storage kecil",
+    "opsiD": "CPU lama",
+    "jawaban": "RAM besar",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Pilih laptop terbaik untuk pelajar…",
+    "opsiA": "Mahal",
+    "opsiB": "Sesuai kebutuhan",
+    "opsiC": "Gaming",
+    "opsiD": "Server",
+    "jawaban": "Sesuai kebutuhan",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Sistem biner penting karena…",
+    "opsiA": "Rumit",
+    "opsiB": "Dasar komputer",
+    "opsiC": "Tidak penting",
+    "opsiD": "Sulit",
+    "jawaban": "Dasar komputer",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika file besar, solusi transfer…",
+    "opsiA": "Bluetooth",
+    "opsiB": "Wi-Fi",
+    "opsiC": "Kabel cepat",
+    "opsiD": "Semua benar",
+    "jawaban": "Semua benar",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Mana lebih cepat?",
+    "opsiA": "HDD",
+    "opsiB": "SSD",
+    "opsiC": "Flashdisk",
+    "opsiD": "CD",
+    "jawaban": "SSD",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika software tidak kompatibel…",
+    "opsiA": "Bisa jalan",
+    "opsiB": "Tidak berjalan",
+    "opsiC": "Lebih cepat",
+    "opsiD": "Lebih murah",
+    "jawaban": "Tidak berjalan",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika OS rusak…",
+    "opsiA": "Komputer normal",
+    "opsiB": "Tidak bisa digunakan",
+    "opsiC": "Lebih cepat",
+    "opsiD": "Lebih ringan",
+    "jawaban": "Tidak bisa digunakan",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Pilihan terbaik untuk kerja kantor…",
+    "opsiA": "Gaming PC",
+    "opsiB": "PC standar",
+    "opsiC": "Server",
+    "opsiD": "Supercomputer",
+    "jawaban": "PC standar",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Mana lebih aman?",
+    "opsiA": "Software bajakan",
+    "opsiB": "Software resmi",
+    "opsiC": "Tanpa software",
+    "opsiD": "Tidak pakai OS",
+    "jawaban": "Software resmi",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika ingin hemat listrik…",
+    "opsiA": "PC besar",
+    "opsiB": "Laptop",
+    "opsiC": "Server",
+    "opsiD": "GPU besar",
+    "jawaban": "Laptop",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Pilih jaringan terbaik untuk rumah…",
+    "opsiA": "Bluetooth",
+    "opsiB": "Wi-Fi",
+    "opsiC": "Kabel saja",
+    "opsiD": "Infrared",
+    "jawaban": "Wi-Fi",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika data penting, harus…",
+    "opsiA": "Dihapus",
+    "opsiB": "Disimpan & backup",
+    "opsiC": "Dibuka",
+    "opsiD": "Diedit",
+    "jawaban": "Disimpan & backup",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Mana lebih fleksibel?",
+    "opsiA": "Closed source",
+    "opsiB": "Open source",
+    "opsiC": "Tidak ada",
+    "opsiD": "Semua sama",
+    "jawaban": "Open source",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika komputer mati mendadak…",
+    "opsiA": "Normal",
+    "opsiB": "Ada masalah",
+    "opsiC": "Cepat",
+    "opsiD": "Aman",
+    "jawaban": "Ada masalah",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Pilihan terbaik untuk belajar coding…",
+    "opsiA": "HP lama",
+    "opsiB": "Laptop standar",
+    "opsiC": "Server",
+    "opsiD": "Supercomputer",
+    "jawaban": "Laptop standar",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Mana lebih efisien?",
+    "opsiA": "Manual",
+    "opsiB": "Otomatis",
+    "opsiC": "Lambat",
+    "opsiD": "Rumit",
+    "jawaban": "Otomatis",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Jika ingin performa tinggi…",
+    "opsiA": "RAM kecil",
+    "opsiB": "CPU cepat",
+    "opsiC": "Storage kecil",
+    "opsiD": "Tanpa GPU",
+    "jawaban": "CPU cepat",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Mana lebih baik?",
+    "opsiA": "Tidak sesuai kebutuhan",
+    "opsiB": "Sesuai kebutuhan",
+    "opsiC": "Mahal",
+    "opsiD": "Murah saja",
+    "jawaban": "Sesuai kebutuhan",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "Kesimpulan sistem komputer…",
+    "opsiA": "Tidak penting",
+    "opsiB": "Membantu manusia",
+    "opsiC": "Sulit",
+    "opsiD": "Mahal",
+    "jawaban": "Membantu manusia",
+    "level": "high"
+  },
+  {
+    "pertanyaan": "apa warna bendera indonesia",
+    "opsiA": "merah putih",
+    "opsiB": "hijau",
+    "opsiC": "biru",
+    "opsiD": "kuning",
+    "jawaban": "merah putih",
+    "level": "ulangan harian"
+  },
+  {
+    "pertanyaan": "dhila itu",
+    "opsiA": "cantik",
+    "opsiB": "cantik banget",
+    "opsiC": "cantik banget banget",
+    "opsiD": "cantik aja",
+    "jawaban": "cantik banget banget",
+    "level": "ulangan harian"
+  },
+  {
+    "pertanyaan": "apa warna apel",
+    "opsiA": "merah",
+    "opsiB": "putih",
+    "opsiC": "hitam",
+    "opsiD": "biru",
+    "jawaban": "merah",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "sapi makan apa",
+    "opsiA": "rumput",
+    "opsiB": "pisang",
+    "opsiC": "daging",
+    "opsiD": "Mouse",
+    "jawaban": "rumput",
+    "level": "low"
+  },
+  {
+    "pertanyaan": "pitul",
+    "opsiA": "jelek",
+    "opsiB": "jelleki",
+    "opsiC": "jelekkk",
+    "opsiD": "poll",
+    "jawaban": "jelekkk",
+    "level": "low"
+  }
+]

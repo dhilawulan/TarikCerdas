@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Kategori - Buat Kategori Baru</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="tambah-soal-wrapper">
+        <div class="tambah-soal-container">
+            <div class="tambah-soal-header">
+                <div class="header-icon">⚙️</div>
+                <h1>Tambahkan Kategori</h1>
+                <p>Buat Kategori Baru</p>
+            </div>
+
+            <div class="form-section">
+                <label>Kategori</label>
+                <div id="kategoriTabs" class="kategori-tabs"></div>
+            </div>
+
+            <div class="form-section">
+                <div class="custom-kategori-input">
+                    <input type="text" id="newCategoryInput" placeholder="Masukkan nama kategori baru..." />
+                    <button type="button" id="addCategoryBtn" class="btn-add-custom">
+                        <i class="fas fa-plus"></i> Tambah Kategori
+                    </button>
+                </div>
+                <div id="categoryTagList" class="custom-kategori-list"></div>
+            </div>
+
+            <div class="form-section selected-kategori-box">
+                <div class="selected-kategori-heading">
+                    <strong>Pilih Kategori</strong>
+                    <button type="button" id="clearCategoriesBtn" class="btn-clear">
+                        <i class="fas fa-trash"></i> Hapus
+                    </button>
+                </div>
+                <div id="selectedTabLabel" class="selected-kategori-display">Low</div>
+            </div>
+
+            <div class="form-footer kategori-action-footer">
+                <button type="button" id="saveCategoriesBtn" class="btn-submit">Simpan</button>
+            </div>
+
+            <div class="form-footer">
+                <a href="/dashboard" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/tambah-kategori.js"></script>
+</body>
+</html>
+

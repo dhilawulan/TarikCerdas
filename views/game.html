@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Tarik Tambang</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <h1 id="judul"></h1>
+
+    <!-- AREA QR -->
+    <div class="scan-area">
+        <h2>Scan QR untuk mulai</h2>
+        <div class="qr-box">
+            <p>SCAN ME</p>
+        </div>
+    </div>
+
+    <a href="/dashboard">Kembali</a>
+
+    <script>
+        // ambil kategori/level dari URL
+        const params = new URLSearchParams(window.location.search);
+        let level = params.get('level') || params.get('kategori');
+
+        // tampilkan di halaman
+        document.getElementById("judul").innerText =
+            "Level: " + (level ? level.toUpperCase() : "UNKNOWN");
+    </script>
+
+</body>
+</html>
