@@ -339,6 +339,8 @@ app.post('/api/soal/delete/:id', (req, res) => {
 
 let skor = { 1: 0, 2: 0 };
 let gameStatus = { 1: false, 2: false }; // Track apakah tim sudah selesai menjawab semua soal
+let startTime = { 1: null, 2: null }; // timestamp ms when team started
+let finishTime = { 1: null, 2: null }; // timestamp ms when team finished
 
 app.get('/api/soal', (req, res) => {
     const level = req.query.level;
@@ -394,18 +396,45 @@ app.post('/api/finish-game', (req, res) => {
     
     if (team === 1 || team === 2) {
         gameStatus[team] = true;
+        // record finish time if not set
+        if (!finishTime[team]) finishTime[team] = Date.now();
     }
     
-    res.json({ success: true, gameStatus, bothFinished: gameStatus[1] && gameStatus[2] });
+    res.json({ success: true, gameStatus, bothFinished: gameStatus[1] && gameStatus[2], finishTime });
 });
 
 // Endpoint untuk check status game
 app.get('/api/game-status', (req, res) => {
+    // compute time spent (ms) for each team if start and finish exist
+    const timeSpent = { 1: null, 2: null };
+    [1,2].forEach(t => {
+        if (startTime[t] && finishTime[t]) {
+            timeSpent[t] = finishTime[t] - startTime[t];
+        } else if (startTime[t] && !finishTime[t]) {
+            timeSpent[t] = Date.now() - startTime[t];
+        }
+    });
+
     res.json({ 
         gameStatus, 
         bothFinished: gameStatus[1] && gameStatus[2],
-        skor 
+        skor,
+        startTime,
+        finishTime,
+        timeSpent
     });
+});
+
+// Record team start time when play page loads
+app.post('/api/start-team', (req, res) => {
+    const team = req.body.team;
+    if (team === 1 || team === 2) {
+        if (!startTime[team]) startTime[team] = Date.now();
+        // reset finishTime if previously set
+        finishTime[team] = null;
+        gameStatus[team] = false;
+    }
+    res.json({ success: true, startTime, finishTime });
 });
 
 app.post('/api/reset-score', (req, res) => {

@@ -297,49 +297,13 @@
     "level": "middle"
   },
   {
-    "pertanyaan": "Komputer lambat bisa disebabkan oleh…",
-    "opsiA": "RAM kecil",
-    "opsiB": "Layar besar",
-    "opsiC": "Keyboard bagus",
-    "opsiD": "Mouse baru",
-    "jawaban": "RAM kecil",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Software dan hardware saling…",
-    "opsiA": "Terpisah",
-    "opsiB": "Tidak berhubungan",
-    "opsiC": "Bergantung",
-    "opsiD": "Tidak penting",
-    "jawaban": "Bergantung",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Mengapa OS penting?",
-    "opsiA": "Untuk desain",
-    "opsiB": "Mengatur sistem",
-    "opsiC": "Menyimpan data",
-    "opsiD": "Menggambar",
-    "jawaban": "Mengatur sistem",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Transfer file besar lebih lambat karena…",
-    "opsiA": "Ukuran file",
-    "opsiB": "Warna file",
-    "opsiC": "Nama file",
-    "opsiD": "Jenis file",
-    "jawaban": "Ukuran file",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Printer tidak bisa bekerja tanpa…",
-    "opsiA": "CPU",
-    "opsiB": "Software",
-    "opsiC": "Listrik",
-    "opsiD": "Semua benar",
-    "jawaban": "Semua benar",
-    "level": "middle"
+    "pertanyaan": "pitul",
+    "opsiA": "jelek",
+    "opsiB": "jelleki",
+    "opsiC": "jelekkk",
+    "opsiD": "cantik tapi boong",
+    "jawaban": "jelekkk",
+    "level": "low"
   },
   {
     "pertanyaan": "Smartphone termasuk sistem karena…",

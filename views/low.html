@@ -36,15 +36,21 @@
                 </div>
             </div>
 
+            <!-- Mode Selection -->
+            <div class="mode-switch">
+                <button id="modeQrBtn" class="mode-btn active">Scan QR</button>
+                <button id="modeScreenBtn" class="mode-btn">Main di Layar</button>
+            </div>
+
             <!-- QR Codes untuk Tim -->
-            <div class="qr-codes-container">
+            <div class="qr-codes-container" id="qrModeContainer">
                 <div class="team-qr">
                     <div class="team-label">
                         <i class="fas fa-users"></i>
                         <h3>TIM 1</h3>
                     </div>
                     <div class="qr-code-box">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:3000/play?team=1%26level=low">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http://localhost:3000/play?team=1&level=low" alt="QR Code Tim 1">
                     </div>
                 </div>
 
@@ -54,8 +60,103 @@
                         <h3>TIM 2</h3>
                     </div>
                     <div class="qr-code-box">
-                       <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:3000/play?team=2%26level=low">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http://localhost:3000/play?team=2&level=low" alt="QR Code Tim 2">
                     </div>
+                </div>
+            </div>
+
+            <!-- MAIN SCREEN DISPLAY MODE -->
+            <div id="mainScreenMode" class="main-screen-mode" style="display: none;">
+                <!-- Main Screen Header -->
+                <div class="main-screen-display-header">
+                    <h1 id="mainGameTitle">Jawab soal ini untuk menarik tambang</h1>
+                    <div class="main-progress-bar">
+                        <div id="mainProgressFill" class="main-progress-fill"></div>
+                    </div>
+                </div>
+
+                <!-- Scores & Rope -->
+                <div class="main-screen-section">
+                    <div class="main-scores-display">
+                        <div class="main-score-team">
+                            <h3>Skor Tim 1</h3>
+                            <p class="main-score-value" id="mainScoreTeam1">0</p>
+                        </div>
+                        
+                        <div class="main-rope-container">
+                            <img src="/images/tarik.png" id="mainRopeImg" alt="Tarik Tambang" class="main-rope">
+                            <div class="main-center-line"></div>
+                        </div>
+                        
+                        <div class="main-score-team">
+                            <h3>Skor Tim 2</h3>
+                            <p class="main-score-value" id="mainScoreTeam2">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions Section -->
+                <div class="main-questions-container">
+                    <!-- Tim 1 Question -->
+                    <div class="main-team-question-box" id="team1QuestionBox">
+                        <div class="main-question-label">
+                            <span class="main-team-indicator tim-1">TIM 1</span>
+                        </div>
+                        <div class="main-question-content">
+                            <h3 id="mainQuestion1" class="main-question-text">Loading...</h3>
+                            <div class="main-options-grid">
+                                <button class="main-opsi-btn" data-opsi="A" data-team="1">
+                                    <span class="main-opsi-letter">A</span>
+                                    <span class="main-opsi-text" id="mainOpsi1A">-</span>
+                                </button>
+                                <button class="main-opsi-btn" data-opsi="B" data-team="1">
+                                    <span class="main-opsi-letter">B</span>
+                                    <span class="main-opsi-text" id="mainOpsi1B">-</span>
+                                </button>
+                                <button class="main-opsi-btn" data-opsi="C" data-team="1">
+                                    <span class="main-opsi-letter">C</span>
+                                    <span class="main-opsi-text" id="mainOpsi1C">-</span>
+                                </button>
+                                <button class="main-opsi-btn" data-opsi="D" data-team="1">
+                                    <span class="main-opsi-letter">D</span>
+                                    <span class="main-opsi-text" id="mainOpsi1D">-</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tim 2 Question -->
+                    <div class="main-team-question-box" id="team2QuestionBox">
+                        <div class="main-question-label">
+                            <span class="main-team-indicator tim-2">TIM 2</span>
+                        </div>
+                        <div class="main-question-content">
+                            <h3 id="mainQuestion2" class="main-question-text">Loading...</h3>
+                            <div class="main-options-grid">
+                                <button class="main-opsi-btn" data-opsi="A" data-team="2">
+                                    <span class="main-opsi-letter">A</span>
+                                    <span class="main-opsi-text" id="mainOpsi2A">-</span>
+                                </button>
+                                <button class="main-opsi-btn" data-opsi="B" data-team="2">
+                                    <span class="main-opsi-letter">B</span>
+                                    <span class="main-opsi-text" id="mainOpsi2B">-</span>
+                                </button>
+                                <button class="main-opsi-btn" data-opsi="C" data-team="2">
+                                    <span class="main-opsi-letter">C</span>
+                                    <span class="main-opsi-text" id="mainOpsi2C">-</span>
+                                </button>
+                                <button class="main-opsi-btn" data-opsi="D" data-team="2">
+                                    <span class="main-opsi-letter">D</span>
+                                    <span class="main-opsi-text" id="mainOpsi2D">-</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Screen Status -->
+                <div class="main-screen-status-bar">
+                    <span id="mainStatusText">Menunggu Tim...</span>
                 </div>
             </div>
 
@@ -99,7 +200,7 @@
             <!-- Rope Game Area with Trophy -->
             <div class="rope-area">
                 <div class="rope-wrapper">
-                    <img src="/images/tim_1.png" id="rope-img-win" alt="Tarik Tambang" class="rope-img-win">
+                    <img src="/images/tarik.png" id="rope-img-win" alt="Tarik Tambang" class="rope-img-win">
                     <div class="center-line"></div>
                 </div>
             </div>
@@ -148,6 +249,7 @@
         window.gameLevel = 'low';
     </script>
     <script src="/js/game.js"></script>
+    <script src="/js/main-screen.js"></script>
 
 </body>
 </html>

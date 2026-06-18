@@ -9,14 +9,46 @@ async function checkGameStatus() {
         // Check if both teams finished
         if (data.bothFinished && !gameWon) {
             gameWon = true;
-            
-            // Determine winning team
+
             const score1 = data.skor[1] || 0;
             const score2 = data.skor[2] || 0;
-            winningTeam = score1 > score2 ? 1 : (score2 > score1 ? 2 : 0);
-            
-            // Show win screen
-            showWinScreen(score1, score2, winningTeam);
+
+            // timeSpent returned by server is in milliseconds or null
+            const t1 = data.timeSpent && data.timeSpent[1] ? data.timeSpent[1] : null;
+            const t2 = data.timeSpent && data.timeSpent[2] ? data.timeSpent[2] : null;
+
+            // Determine winning team by score first, then by fastest time if tie
+            if (score1 > score2) {
+                winningTeam = 1;
+            } else if (score2 > score1) {
+                winningTeam = 2;
+            } else {
+                // tie on score -> compare times (smaller ms wins). If any time is null, treat that team as slower.
+                if (t1 != null && t2 != null) {
+                    winningTeam = (t1 <= t2) ? 1 : 2;
+                } else if (t1 != null) {
+                    winningTeam = 1;
+                } else if (t2 != null) {
+                    winningTeam = 2;
+                } else {
+                    winningTeam = 0; // fully tie/no times
+                }
+            }
+
+            // Format times to mm:ss
+            function formatMs(ms) {
+                if (ms == null) return '00:00';
+                const totalSec = Math.floor(ms / 1000);
+                const m = Math.floor(totalSec / 60).toString().padStart(2, '0');
+                const s = (totalSec % 60).toString().padStart(2, '0');
+                return `${m}:${s}`;
+            }
+
+            const timeStr1 = formatMs(t1);
+            const timeStr2 = formatMs(t2);
+
+            // Show win screen with times
+            showWinScreen(score1, score2, winningTeam, timeStr1, timeStr2);
         }
     } catch (error) {
         console.error('Error checking game status:', error);
@@ -98,7 +130,7 @@ function createConfetti() {
 }
 
 // Show win screen
-function showWinScreen(scoreTeam1, scoreTeam2, winner) {
+function showWinScreen(scoreTeam1, scoreTeam2, winner, time1, time2) {
     const gameContainer = document.getElementById('gameContainer');
     const winScreen = document.getElementById('winScreen');
     const winTitle = document.getElementById('winTitle');
@@ -106,6 +138,8 @@ function showWinScreen(scoreTeam1, scoreTeam2, winner) {
     const winScoreTeam2Top = document.getElementById('winScoreTeam2Top');
     const trophyLabel = document.getElementById('trophyLabel');
     const trophyScore = document.getElementById('trophyScore');
+    const winTimeTeam1 = document.getElementById('winTimeTeam1');
+    const winTimeTeam2 = document.getElementById('winTimeTeam2');
 
     if (gameContainer && winScreen) {
         // Hide game container
@@ -132,6 +166,8 @@ function showWinScreen(scoreTeam1, scoreTeam2, winner) {
         winScoreTeam1Top.textContent = scoreTeam1;
         winScoreTeam2Top.textContent = scoreTeam2;
         trophyScore.textContent = (winner === 1 ? scoreTeam1 : winner === 2 ? scoreTeam2 : '—');
+        if (winTimeTeam1) winTimeTeam1.textContent = time1 || '00:00';
+        if (winTimeTeam2) winTimeTeam2.textContent = time2 || '00:00';
         
         // Highlight winning team score
         if (winner === 1) {
@@ -158,6 +194,17 @@ function showWinScreen(scoreTeam1, scoreTeam2, winner) {
         
         // Play sound effect if available (optional)
         playWinSound();
+        // mark winner QR with badge
+        try {
+            document.querySelectorAll('.win-qr-box .winner-badge').forEach(el => el.style.display = 'none');
+            if (winner === 1) {
+                const el = document.querySelectorAll('.win-team-qr')[0];
+                if (el) el.querySelector('.winner-badge').style.display = 'block';
+            } else if (winner === 2) {
+                const el = document.querySelectorAll('.win-team-qr')[1];
+                if (el) el.querySelector('.winner-badge').style.display = 'block';
+            }
+        } catch (e) {}
     }
 }
 
@@ -258,6 +305,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (document.getElementById('scoreTeam2')) {
                             document.getElementById('scoreTeam2').textContent = '0';
                         }
+                        if (document.getElementById('mainScoreTeam1')) {
+                            document.getElementById('mainScoreTeam1').textContent = '0';
+                        }
+                        if (document.getElementById('mainScoreTeam2')) {
+                            document.getElementById('mainScoreTeam2').textContent = '0';
+                        }
                         if (document.getElementById('rope-img')) {
                             document.getElementById('rope-img').style.transform = 'translateX(0px)';
                         }
@@ -289,6 +342,45 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+    }
+
+    const modeQrBtn = document.getElementById('modeQrBtn');
+    const modeScreenBtn = document.getElementById('modeScreenBtn');
+
+    function setDisplayMode(mode) {
+        const qrContainer = document.getElementById('qrModeContainer');
+        const mainScreen = document.getElementById('mainScreenMode');
+        const gameHeader = document.querySelector('.class-game-header');
+        const topRope = document.querySelector('.rope-area');
+
+        if (mode === 'screen') {
+            if (qrContainer) qrContainer.style.display = 'none';
+            if (mainScreen) mainScreen.style.display = 'flex';
+            if (gameHeader) gameHeader.style.display = 'none';
+            if (topRope) topRope.style.display = 'none';
+            if (modeQrBtn) modeQrBtn.classList.remove('active');
+            if (modeScreenBtn) modeScreenBtn.classList.add('active');
+        } else {
+            if (qrContainer) qrContainer.style.display = 'grid';
+            if (mainScreen) mainScreen.style.display = 'none';
+            if (gameHeader) gameHeader.style.display = 'block';
+            if (topRope) topRope.style.display = 'flex';
+            if (modeQrBtn) modeQrBtn.classList.add('active');
+            if (modeScreenBtn) modeScreenBtn.classList.remove('active');
+        }
+    }
+
+    if (modeQrBtn && modeScreenBtn) {
+        modeQrBtn.addEventListener('click', function() {
+            setDisplayMode('qr');
+        });
+        modeScreenBtn.addEventListener('click', function() {
+            setDisplayMode('screen');
+            if (typeof initMainScreenMode === 'function' && window.mainScreenQuestionsTeam1 && window.mainScreenQuestionsTeam1.length === 0) {
+                initMainScreenMode();
+            }
+        });
+        setDisplayMode('qr');
     }
 });
 

@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Set header
     document.getElementById('levelDisplay').textContent = level.charAt(0).toUpperCase() + level.slice(1) + ' Level';
     document.getElementById('teamDisplay').textContent = `Team: ${team}`;
+    // Notify server that this team started so we can measure time
+    try {
+        await fetch('/api/start-team', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ team: parseInt(team) })
+        });
+    } catch (err) {
+        console.error('Error sending start-team:', err);
+    }
     
     // Load soal
     await loadQuestions();
