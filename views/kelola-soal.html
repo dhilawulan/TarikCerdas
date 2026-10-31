@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <script src="/js/theme.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kelola Soal</title>
@@ -200,9 +201,6 @@
                     <button id="addQuestionBtn" class="btn-primary">
                         <i class="fas fa-plus"></i> Buat Pertanyaan
                     </button>
-                    <button id="refreshBtn" class="btn-primary">
-                        <i class="fas fa-sync-alt"></i> Muat Ulang
-                    </button>
                 </div>
             </div>
 
@@ -214,10 +212,6 @@
                 <div class="summary-card">
                     <small>Total Soal Bank</small>
                     <strong id="totalQuestions">0</strong>
-                </div>
-                <div class="summary-card">
-                    <small>Soal per Tim</small>
-                    <strong id="questionsPerTeam">0</strong>
                 </div>
             </div>
 
@@ -267,6 +261,12 @@
                     </div>
                 </div>
 
+                <!-- Penambahan Input Opsi E -->
+                <div class="form-group">
+                    <label for="editOpsiE">Opsi E *</label>
+                    <input type="text" id="editOpsiE" required>
+                </div>
+
                 <div class="form-group">
                     <label for="editJawaban">Jawaban Benar *</label>
                     <select id="editJawaban" required>
@@ -275,6 +275,7 @@
                         <option value="B">B</option>
                         <option value="C">C</option>
                         <option value="D">D</option>
+                        <option value="E">E</option> <!-- Penambahan Pilihan E -->
                     </select>
                 </div>
 

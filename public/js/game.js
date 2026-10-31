@@ -1,29 +1,109 @@
 let gameWon = false;
 let winningTeam = null;
 
+// =========================================================
+// 1. SISTEM AUDIO (QUIZ BACKSOUND & WINNER SOUND)
+// =========================================================
+const quizSound = new Audio('/sounds/quiz-theme.mp3');     // Path audio kuis
+const winnerSound = new Audio('/sounds/winner-fanfare.mp3'); // Path audio pemenang
+
+quizSound.loop = true;  // Audio kuis berulang (loop) selama kuis berjalan
+quizSound.volume = 0.5;
+
+winnerSound.loop = false; // Audio pemenang HANYA diputar 1 kali
+winnerSound.volume = 0.8;
+
+let isQuizSoundPlaying = false;
+let isQuizStarted = false; // Flag untuk mencatat apakah kuis sudah resmi dimulai via jawaban
+let isAudioUnlocked = false; // Penanda apakah browser sudah mengizinkan autoplay
+
+// Pancing/Unlock izin audio browser saat ada interaksi pertama dari user
+function unlockAudioContext() {
+    if (isAudioUnlocked) return;
+    
+    // Putar audio bisu singkat atau pancing play-pause untuk membuka proteksi autoplay browser
+    const unlockPromise = quizSound.play();
+    if (unlockPromise !== undefined) {
+        unlockPromise.then(() => {
+            if (!isQuizStarted) {
+                quizSound.pause();
+                quizSound.currentTime = 0;
+            } else {
+                isQuizSoundPlaying = true;
+            }
+            isAudioUnlocked = true;
+        }).catch(() => {
+            // Pengguna belum melakukan interaksi penuh
+        });
+    }
+}
+
+// Fungsi Memulai Audio Kuis
+function startQuizAudio() {
+    if (!isQuizSoundPlaying && !gameWon) {
+        quizSound.play().then(() => {
+            isQuizSoundPlaying = true;
+            isQuizStarted = true;
+            isAudioUnlocked = true;
+        }).catch(err => {
+            console.warn("Menunggu interaksi pengguna untuk memutar audio kuis:", err);
+        });
+    }
+}
+
+// Fungsi Menghentikan Audio Kuis
+function stopQuizSound() {
+    quizSound.pause();
+    quizSound.currentTime = 0;
+    isQuizSoundPlaying = false;
+}
+
+// Fungsi Memutar Audio Pemenang (1x Saja)
+function triggerWinnerSound() {
+    stopQuizSound(); // Matikan audio kuis terlebih dahulu
+
+    winnerSound.currentTime = 0; // Reset audio pemenang ke awal
+    const playPromise = winnerSound.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            console.log("Audio pemenang berhasil diputar!");
+        }).catch(err => {
+            console.error("Gagal memutar audio pemenang karena Autoplay Policy:", err);
+            
+            // Pengaman Cadangan: Jika diblokir, pasang event listener satu kali saat pengguna mengeklik layar
+            const playOnUserInteraction = () => {
+                winnerSound.play().catch(e => console.error(e));
+                document.removeEventListener('click', playOnUserInteraction);
+            };
+            document.addEventListener('click', playOnUserInteraction);
+        });
+    }
+}
+
+// Pengecekan Status Game Otomatis
 async function checkGameStatus() {
     try {
-        const res = await fetch('/api/game-status');
+        const level = window.gameLevel || 'low';
+        const res = await fetch(`/api/game-status?level=${level}`);
         const data = await res.json();
         
-        // Check if both teams finished
+        // Cek jika kedua tim telah selesai menjawab
         if (data.bothFinished && !gameWon) {
             gameWon = true;
 
-            const score1 = data.skor[1] || 0;
-            const score2 = data.skor[2] || 0;
+            const score1 = data.skor ? (data.skor[1] || 0) : 0;
+            const score2 = data.skor ? (data.skor[2] || 0) : 0;
 
-            // timeSpent returned by server is in milliseconds or null
             const t1 = data.timeSpent && data.timeSpent[1] ? data.timeSpent[1] : null;
             const t2 = data.timeSpent && data.timeSpent[2] ? data.timeSpent[2] : null;
 
-            // Determine winning team by score first, then by fastest time if tie
+            // Penentuan Pemenang
             if (score1 > score2) {
                 winningTeam = 1;
             } else if (score2 > score1) {
                 winningTeam = 2;
             } else {
-                // tie on score -> compare times (smaller ms wins). If any time is null, treat that team as slower.
                 if (t1 != null && t2 != null) {
                     winningTeam = (t1 <= t2) ? 1 : 2;
                 } else if (t1 != null) {
@@ -31,11 +111,10 @@ async function checkGameStatus() {
                 } else if (t2 != null) {
                     winningTeam = 2;
                 } else {
-                    winningTeam = 0; // fully tie/no times
+                    winningTeam = 0; // Seri
                 }
             }
 
-            // Format times to mm:ss
             function formatMs(ms) {
                 if (ms == null) return '00:00';
                 const totalSec = Math.floor(ms / 1000);
@@ -47,7 +126,6 @@ async function checkGameStatus() {
             const timeStr1 = formatMs(t1);
             const timeStr2 = formatMs(t2);
 
-            // Show win screen with times
             showWinScreen(score1, score2, winningTeam, timeStr1, timeStr2);
         }
     } catch (error) {
@@ -55,294 +133,259 @@ async function checkGameStatus() {
     }
 }
 
+// Update Pergeseran Tali & Skor
 async function updateBar() {
-    let res = await fetch('/api/score');
-    let data = await res.json();
+    try {
+        let res = await fetch('/api/score');
+        let data = await res.json();
 
-    // Update score display
-    if (document.getElementById('scoreTeam1')) {
-        document.getElementById('scoreTeam1').textContent = data[1] || 0;
-    }
-    if (document.getElementById('scoreTeam2')) {
-        document.getElementById('scoreTeam2').textContent = data[2] || 0;
-    }
+        const score1 = data[1] || 0;
+        const score2 = data[2] || 0;
 
-    let total = data[1] + data[2];
-    if (total === 0) return;
+        if (document.getElementById('scoreTeam1')) {
+            document.getElementById('scoreTeam1').textContent = score1;
+        }
+        if (document.getElementById('scoreTeam2')) {
+            document.getElementById('scoreTeam2').textContent = score2;
+        }
 
-    // hitung selisih skor
-    let selisih = data[2] - data[1];
+        let total = score1 + score2;
+        if ((total > 0 || (data.activity && data.activity === true)) && !isQuizSoundPlaying && !gameWon) {
+            startQuizAudio();
+        }
 
-    // ubah jadi posisi (pixel)
-    let posisi = selisih * 20; // angka 20 bisa kamu ubah (kecepatan geser)
+        if (total === 0) return;
 
-    // batas biar gak keluar layar
-    if (posisi > 150) posisi = 150;
-    if (posisi < -150) posisi = -150;
+        let selisih = score2 - score1;
+        let posisi = selisih * 20;
 
-    // geser gambar
-    document.getElementById("rope-img").style.transform =
-        `translateX(${posisi}px)`;
-}
+        if (posisi > 150) posisi = 150;
+        if (posisi < -150) posisi = -150;
 
-// Create confetti effect
-function createConfetti() {
-    const confettiContainer = document.getElementById('confetti');
-    if (!confettiContainer) return;
-
-    const colors = ['#ff4da6', '#ffd700', '#8a2be2', '#00ff88', '#ff6b6b'];
-    const confettiCount = 100;
-
-    for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.width = Math.random() * 10 + 5 + 'px';
-        confetti.style.height = confetti.style.width;
-        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        confetti.style.opacity = Math.random() * 0.8 + 0.2;
-        
-        const duration = Math.random() * 3 + 2;
-        const delay = Math.random() * 0.5;
-        confetti.style.animation = `fallStar ${duration}s linear ${delay}s forwards`;
-        
-        confettiContainer.appendChild(confetti);
-    }
-
-    // Add stars animation
-    for (let i = 0; i < 50; i++) {
-        const star = document.createElement('div');
-        star.innerHTML = '✨';
-        star.style.position = 'absolute';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 50 + '%';
-        star.style.fontSize = Math.random() * 20 + 15 + 'px';
-        star.style.opacity = Math.random() * 0.8 + 0.3;
-        
-        const duration = Math.random() * 3 + 2;
-        const delay = Math.random() * 0.5;
-        star.style.animation = `fall ${duration}s ease-in ${delay}s forwards`;
-        star.style.pointerEvents = 'none';
-        
-        confettiContainer.appendChild(star);
+        const ropeImg = document.getElementById("rope-img");
+        if (ropeImg) {
+            ropeImg.style.transform = `translateX(${posisi}px)`;
+        }
+    } catch (e) {
+        console.error("Error updating score bar:", e);
     }
 }
 
-// Show win screen
+// Tampilkan Layar Kemenangan Presisi Sesuai Desain Foto
 function showWinScreen(scoreTeam1, scoreTeam2, winner, time1, time2) {
+    localStorage.setItem('gameCurrentView', 'winScreen');
+
+    // Hapus/sembunyikan elemen kuis & tombol Refresh khusus layar pemenang
+    const elementsToHide = [
+        '#qrModeContainer',
+        '.qr-codes-container',
+        '.rope-area',
+        '.scores-display',
+        '.class-game-header',
+        '#mainScreenMode',
+        '.mode-switch',
+        '#winRefreshBtn',
+        '.btn-win-refresh'
+    ];
+
+    elementsToHide.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.style.setProperty('display', 'none', 'important');
+        });
+    });
+
     const gameContainer = document.getElementById('gameContainer');
+    const quizSection = document.getElementById('quizSection');
+    const summarySection = document.getElementById('summarySection');
     const winScreen = document.getElementById('winScreen');
+    
     const winTitle = document.getElementById('winTitle');
+    const winLevelSubtitle = document.getElementById('winLevelSubtitle');
+    const winMessage = document.querySelector('.win-message');
     const winScoreTeam1Top = document.getElementById('winScoreTeam1Top');
     const winScoreTeam2Top = document.getElementById('winScoreTeam2Top');
-    const trophyLabel = document.getElementById('trophyLabel');
-    const trophyScore = document.getElementById('trophyScore');
-    const winTimeTeam1 = document.getElementById('winTimeTeam1');
-    const winTimeTeam2 = document.getElementById('winTimeTeam2');
 
-    if (gameContainer && winScreen) {
-        // Hide game container
-        gameContainer.style.display = 'none';
-        
-        // Update win screen content
+    if (summarySection) summarySection.style.display = 'none';
+    if (gameContainer) gameContainer.style.display = 'none';
+    if (quizSection) quizSection.style.display = 'block';
+
+    const currentLevel = window.gameLevel || 'low';
+    const isKategoriTambahan = (currentLevel === 'tambahan' || currentLevel === 'extra');
+
+    if (winLevelSubtitle) {
+        if (isKategoriTambahan) {
+            winLevelSubtitle.textContent = 'Kategori Tambahan';
+        } else {
+            winLevelSubtitle.textContent = currentLevel.charAt(0).toUpperCase() + currentLevel.slice(1) + ' Level';
+        }
+    }
+
+    if (winMessage) {
+        if (isKategoriTambahan) {
+            winMessage.textContent = 'Luar biasa! Babak tantangan tambahan berhasil diselesaikan dengan baik!';
+        } else {
+            winMessage.textContent = 'Selamat! Kekompakan tim kalian berhasil menaklukkan tantangan ini!';
+        }
+    }
+
+    if (winTitle && winScreen) {
+        winScreen.classList.remove('win-theme-tambahan');
+
         if (winner === 0) {
-            // Tie
-            winTitle.textContent = `SERI`;
-            winTitle.style.color = '#ffd700'; // Gold for tie
-            trophyLabel.textContent = 'SERI';
-            trophyScore.textContent = '👑';
+            winTitle.textContent = `PERMAINAN SERI`;
+            winTitle.style.color = '#ffd700'; 
+            winTitle.style.textShadow = '0 0 30px rgba(255, 215, 0, 0.8)';
         } else {
             winTitle.textContent = `TIM ${winner} MENANG`;
             if (winner === 1) {
-                winTitle.style.color = '#00ff88'; // Green for team 1
-                trophyLabel.textContent = 'SKOR TIM 1';
+                winTitle.style.color = '#00f2ff';
+                winTitle.style.textShadow = '0 0 30px rgba(0, 242, 255, 0.8)';
             } else {
-                winTitle.style.color = '#ff6b6b'; // Red for team 2
-                trophyLabel.textContent = 'SKOR TIM 2';
+                winTitle.style.color = '#ff2a8d';
+                winTitle.style.textShadow = '0 0 30px rgba(255, 42, 141, 0.8)';
             }
         }
-        
-        winScoreTeam1Top.textContent = scoreTeam1;
-        winScoreTeam2Top.textContent = scoreTeam2;
-        trophyScore.textContent = (winner === 1 ? scoreTeam1 : winner === 2 ? scoreTeam2 : '—');
-        if (winTimeTeam1) winTimeTeam1.textContent = time1 || '00:00';
-        if (winTimeTeam2) winTimeTeam2.textContent = time2 || '00:00';
-        
-        // Highlight winning team score
-        if (winner === 1) {
-            winScoreTeam1Top.style.color = '#00ff88';
-            winScoreTeam1Top.style.textShadow = '0 0 30px rgba(0, 255, 136, 1)';
-            winScoreTeam2Top.style.color = '#999';
-            winScoreTeam2Top.style.textShadow = 'none';
-            trophyLabel.style.color = '#00ff88';
-            trophyScore.style.color = '#00ff88';
-        } else if (winner === 2) {
-            winScoreTeam1Top.style.color = '#999';
-            winScoreTeam1Top.style.textShadow = 'none';
-            winScoreTeam2Top.style.color = '#ff6b6b';
-            winScoreTeam2Top.style.textShadow = '0 0 30px rgba(255, 107, 107, 1)';
-            trophyLabel.style.color = '#ff6b6b';
-            trophyScore.style.color = '#ff6b6b';
+
+        if (isKategoriTambahan) {
+            winScreen.classList.add('win-theme-tambahan');
         }
-        
-        // Show win screen
-        winScreen.style.display = 'flex';
-        
-        // Create confetti
-        createConfetti();
-        
-        // Play sound effect if available (optional)
-        playWinSound();
-        // mark winner QR with badge
+    }
+
+    if (winScoreTeam1Top) winScoreTeam1Top.textContent = scoreTeam1;
+    if (winScoreTeam2Top) winScoreTeam2Top.textContent = scoreTeam2;
+    
+    if (winScreen) {
+        winScreen.style.setProperty('display', 'flex', 'important');
+    }
+    
+    if (typeof createConfetti === 'function') createConfetti();
+    triggerWinnerSound();
+}
+
+// Reset Game Handlers
+async function handleResetGame() {
+    if (confirm('Apakah Anda yakin ingin mereset skor dan memulai dari awal?')) {
         try {
-            document.querySelectorAll('.win-qr-box .winner-badge').forEach(el => el.style.display = 'none');
-            if (winner === 1) {
-                const el = document.querySelectorAll('.win-team-qr')[0];
-                if (el) el.querySelector('.winner-badge').style.display = 'block';
-            } else if (winner === 2) {
-                const el = document.querySelectorAll('.win-team-qr')[1];
-                if (el) el.querySelector('.winner-badge').style.display = 'block';
+            const level = window.gameLevel || 'low';
+            
+            const response = await fetch('/api/reset-score', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ level: level })
+            });
+            
+            if (response.ok) {
+                stopQuizSound();
+                winnerSound.pause();
+                winnerSound.currentTime = 0;
+                isQuizStarted = false;
+
+                localStorage.setItem('gameDisplayMode', 'qr');
+                localStorage.removeItem('gameCurrentView');
+                localStorage.setItem('activeSection', 'quiz');
+
+                gameWon = false;
+                winningTeam = null;
+
+                window.location.reload();
             }
-        } catch (e) {}
+        } catch (error) {
+            console.error('Error resetting score:', error);
+            alert('Gagal mereset skor');
+        }
     }
 }
 
-// Play win sound (optional)
-function playWinSound() {
+// FUNGSI OTOMATIS RESET SCORE & NAVIGASI KE DASHBOARD
+async function handleBackToDashboard(e) {
+    if (e) e.preventDefault();
     try {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
+        const level = window.gameLevel || 'low';
         
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        // Play a celebratory tone
-        oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
-        oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
-        oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
-        
-        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.5);
-    } catch (error) {
-        console.log('Sound effect not available');
+        await fetch('/api/reset-score', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ level: level })
+        });
+    } catch (err) {
+        console.error('Error auto resetting score before dashboard navigation:', err);
+    } finally {
+        stopQuizSound();
+        if (winnerSound) {
+            winnerSound.pause();
+            winnerSound.currentTime = 0;
+        }
+
+        localStorage.removeItem('activeSection');
+        localStorage.removeItem('gameCurrentView');
+        localStorage.setItem('gameDisplayMode', 'qr');
+
+        gameWon = false;
+        winningTeam = null;
+
+        window.location.href = '/dashboard';
     }
 }
 
-// Setup refresh button
+// Event Listeners Initialization
 document.addEventListener('DOMContentLoaded', function() {
-    const refreshBtn = document.getElementById('refreshBtn');
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', async function() {
-            if (confirm('Apakah Anda yakin ingin mereset skor dan memulai dari awal?')) {
-                try {
-                    const response = await fetch('/api/reset-score', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'}
-                    });
-                    
-                    if (response.ok) {
-                        // Reset UI
-                        if (document.getElementById('scoreTeam1')) {
-                            document.getElementById('scoreTeam1').textContent = '0';
-                        }
-                        if (document.getElementById('scoreTeam2')) {
-                            document.getElementById('scoreTeam2').textContent = '0';
-                        }
-                        if (document.getElementById('rope-img')) {
-                            document.getElementById('rope-img').style.transform = 'translateX(0px)';
-                        }
-                        
-                        // Hide win screen and show game container
-                        const gameContainer = document.getElementById('gameContainer');
-                        const winScreen = document.getElementById('winScreen');
-                        if (winScreen) {
-                            winScreen.style.display = 'none';
-                            if (gameContainer) {
-                                gameContainer.style.display = 'flex';
-                            }
-                            // Clear confetti
-                            const confettiContainer = document.getElementById('confetti');
-                            if (confettiContainer) {
-                                confettiContainer.innerHTML = '';
-                            }
-                        }
-                        
-                        // Reset game state
-                        gameWon = false;
-                        winningTeam = null;
-                        
-                        alert('Skor telah direset!');
-                    }
-                } catch (error) {
-                    console.error('Error resetting score:', error);
-                    alert('Gagal mereset skor');
-                }
-            }
-        });
+    // Pancing unlock audio pada klik pertama di manapun dalam dokumen
+    document.addEventListener('click', unlockAudioContext, { once: true });
+
+    const userRole = localStorage.getItem('userRole') || 'guru';
+    
+    function hideGuruElements() {
+        if (userRole === 'siswa') {
+            const selectorsToHide = [
+                '.guru-only-btn',
+                '.btn-manage',
+                '.edit-materi-btn',
+                '.btn-edit-materi',
+                '.btn-save-materi',
+                '#saveMateriBtn',
+                '.btn-edit',
+                '.edit-timer-btn',
+                '.btn-edit-timer',
+                '#editTimerBtn',
+                '[onclick*="enableEditMateri"]',
+                '[onclick*="toggleEdit"]'
+            ];
+
+            selectorsToHide.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => {
+                    el.style.setProperty('display', 'none', 'important');
+                });
+            });
+        }
     }
 
-    // Setup win screen refresh button
+    hideGuruElements();
+
+    const observer = new MutationObserver(() => {
+        hideGuruElements();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    document.querySelectorAll('a[href="/dashboard"], .btn-win-back, .btn-back-game').forEach(link => {
+        if (link.getAttribute('href') === '/dashboard' || link.classList.contains('btn-win-back')) {
+            link.addEventListener('click', handleBackToDashboard);
+        }
+    });
+
+    document.addEventListener('click', function handleFirstAnswerClick(e) {
+        const isOptionButton = e.target.closest('.opsi-btn') || 
+                               e.target.closest('.main-opsi-btn') || 
+                               e.target.classList.contains('opsi-btn');
+        if (isOptionButton && !isQuizStarted && !gameWon) {
+            startQuizAudio();
+        }
+    });
+
+    const refreshBtn = document.getElementById('refreshBtn');
+    if (refreshBtn) refreshBtn.addEventListener('click', handleResetGame);
+
     const winRefreshBtn = document.getElementById('winRefreshBtn');
-    if (winRefreshBtn) {
-        winRefreshBtn.addEventListener('click', async function() {
-            if (confirm('Apakah Anda yakin ingin mereset skor dan memulai dari awal?')) {
-                try {
-                    const response = await fetch('/api/reset-score', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'}
-                    });
-                    
-                    if (response.ok) {
-                        // Reset UI
-                        if (document.getElementById('scoreTeam1')) {
-                            document.getElementById('scoreTeam1').textContent = '0';
-                        }
-                        if (document.getElementById('scoreTeam2')) {
-                            document.getElementById('scoreTeam2').textContent = '0';
-                        }
-                        if (document.getElementById('mainScoreTeam1')) {
-                            document.getElementById('mainScoreTeam1').textContent = '0';
-                        }
-                        if (document.getElementById('mainScoreTeam2')) {
-                            document.getElementById('mainScoreTeam2').textContent = '0';
-                        }
-                        if (document.getElementById('rope-img')) {
-                            document.getElementById('rope-img').style.transform = 'translateX(0px)';
-                        }
-                        
-                        // Hide win screen and show game container
-                        const gameContainer = document.getElementById('gameContainer');
-                        const winScreen = document.getElementById('winScreen');
-                        if (winScreen) {
-                            winScreen.style.display = 'none';
-                            if (gameContainer) {
-                                gameContainer.style.display = 'flex';
-                            }
-                            // Clear confetti
-                            const confettiContainer = document.getElementById('confetti');
-                            if (confettiContainer) {
-                                confettiContainer.innerHTML = '';
-                            }
-                        }
-                        
-                        // Reset game state
-                        gameWon = false;
-                        winningTeam = null;
-                        
-                        alert('Skor telah direset!');
-                    }
-                } catch (error) {
-                    console.error('Error resetting score:', error);
-                    alert('Gagal mereset skor');
-                }
-            }
-        });
-    }
+    if (winRefreshBtn) winRefreshBtn.addEventListener('click', handleResetGame);
 
     const modeQrBtn = document.getElementById('modeQrBtn');
     const modeScreenBtn = document.getElementById('modeScreenBtn');
@@ -353,6 +396,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const gameHeader = document.querySelector('.class-game-header');
         const topRope = document.querySelector('.rope-area');
 
+        localStorage.setItem('gameDisplayMode', mode);
+
         if (mode === 'screen') {
             if (qrContainer) qrContainer.style.display = 'none';
             if (mainScreen) mainScreen.style.display = 'flex';
@@ -361,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (modeQrBtn) modeQrBtn.classList.remove('active');
             if (modeScreenBtn) modeScreenBtn.classList.add('active');
         } else {
-            if (qrContainer) qrContainer.style.display = 'grid';
+            if (qrContainer) qrContainer.style.display = 'flex';
             if (mainScreen) mainScreen.style.display = 'none';
             if (gameHeader) gameHeader.style.display = 'block';
             if (topRope) topRope.style.display = 'flex';
@@ -371,19 +416,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (modeQrBtn && modeScreenBtn) {
-        modeQrBtn.addEventListener('click', function() {
-            setDisplayMode('qr');
-        });
+        modeQrBtn.addEventListener('click', function() { setDisplayMode('qr'); });
         modeScreenBtn.addEventListener('click', function() {
             setDisplayMode('screen');
             if (typeof initMainScreenMode === 'function' && window.mainScreenQuestionsTeam1 && window.mainScreenQuestionsTeam1.length === 0) {
                 initMainScreenMode();
             }
         });
-        setDisplayMode('qr');
+        
+        const savedMode = localStorage.getItem('gameDisplayMode') || 'qr';
+        const currentView = localStorage.getItem('gameCurrentView');
+
+        if (currentView === 'winScreen') {
+            localStorage.removeItem('gameCurrentView');
+            localStorage.setItem('gameDisplayMode', 'qr');
+            setDisplayMode('qr');
+        } else {
+            setDisplayMode(savedMode);
+        }
     }
 });
 
-// Update bar & check game status setiap interval
-setInterval(updateBar, 1000); // Update visual bar setiap 1 detik
-setInterval(checkGameStatus, 500); // Check game status setiap 500ms
+setInterval(updateBar, 1000);
+setInterval(checkGameStatus, 500);

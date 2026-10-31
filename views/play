@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <script src="/js/theme.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bermain - Tarik Tambang</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="game-body">
+
+    <div class="play-wrapper">
+        <div class="play-container">
+            <!-- Header (Saat Bermain) -->
+            <div id="playHeader" class="play-header">
+                <div class="play-header-info">
+                    <h2 id="levelDisplay">Loading...</h2>
+                    <p id="teamDisplay">Team: -</p>
+                </div>
+                <div class="play-progress">
+                    <span id="questionCount">1/-</span>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal Container -->
+            <div id="soalContainer" class="soal-container">
+                <div class="soal-box">
+                    <h3 id="pertanyaan" class="pertanyaan-text">Memuat Soal...</h3>
+                    
+                    <!-- KONTANER 4 OPSI JAWABAN (A, B, C, D) -->
+                    <div class="opsi-buttons">
+                        <button class="opsi-btn" data-opsi="A">
+                            <span class="opsi-letter">A</span>
+                            <span id="opsiA" class="opsi-text">-</span>
+                        </button>
+                        <button class="opsi-btn" data-opsi="B">
+                            <span class="opsi-letter">B</span>
+                            <span id="opsiB" class="opsi-text">-</span>
+                        </button>
+                        <button class="opsi-btn" data-opsi="C">
+                            <span class="opsi-letter">C</span>
+                            <span id="opsiC" class="opsi-text">-</span>
+                        </button>
+                        <button class="opsi-btn" data-opsi="D">
+                            <span class="opsi-letter">D</span>
+                            <span id="opsiD" class="opsi-text">-</span>
+                        </button>
+                    </div>
+
+                    <button id="nextBtn" class="btn-next" style="display: none;">
+                        <i class="fas fa-arrow-right"></i> Soal Berikutnya
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hasil Container (Tampilan Selesai) -->
+            <div id="resultsContainer" class="results-container" style="display: none;">
+                <!-- Efek Partikel/Bintang Latar Belakang -->
+                <div class="bg-stars">
+                    <i class="fas fa-sparkles star1"></i>
+                    <i class="fas fa-star star2"></i>
+                    <i class="fas fa-sparkles star3"></i>
+                </div>
+
+                <div class="results-card">
+                    <!-- Judul Level & Tim -->
+                    <h1 class="results-level-title" id="resLevelTitle">LOW LEVEL</h1>
+                    <div class="results-team-badge" id="resTeamBadge">TEAM: 2</div>
+
+                    <!-- Badge Medali / Selesai -->
+                    <div class="badge-wrapper">
+                        <div class="badge-ribbon"></div>
+                        <div class="badge-circle">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <i class="fas fa-star mini-star left"></i>
+                        <i class="fas fa-star mini-star right"></i>
+                    </div>
+
+                    <h2 class="finish-text">SELESAI!</h2>
+
+                    <!-- Statistik Skor & Progress -->
+                    <div class="results-stats">
+                        <div class="stat-box">
+                            <span class="stat-label" id="resTeamLabel">SKOR TIM 2</span>
+                            <div class="stat-score" id="resScoreText">4 / 10</div>
+                        </div>
+
+                        <div class="stat-progress-box">
+                            <span class="progress-count-text" id="resProgressCount">10/10</span>
+                            <div class="stat-progress-bar">
+                                <div class="stat-progress-fill" id="resProgressFill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Kembali -->
+                    <a href="/dashboard" class="btn-back-results">
+                        <i class="fas fa-home"></i> KEMBALI KE GAME
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/play.js?v=2"></script>
+</body>
+</html>

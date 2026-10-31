@@ -1,18 +1,462 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <script src="/js/theme.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game - Low Level</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CDN Library Confetti Pasokan Utama (Sangat Stabil) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* CSS Tombol Edit Materi */
+        .summary-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 20px;
+        }
+
+        .btn-edit-materi {
+            background-color: #2b122c;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-edit-materi:hover {
+            background-color: #3d1b3f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Modal Edit Materi Styling */
+        .edit-material-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .edit-material-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .edit-material-content {
+            background-color: #ffffff;
+            padding: 25px 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            color: #333;
+        }
+
+        .edit-material-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .edit-material-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #2b122c;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .edit-material-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .edit-material-close:hover {
+            color: #333;
+        }
+
+        .material-form-group {
+            margin-bottom: 18px;
+        }
+
+        .material-form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #444;
+        }
+
+        .material-form-group input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', -apple-system, sans-serif !important;
+        }
+
+        /* TOOLBAR FORMAT TEKS & GAMBAR */
+        .editor-toolbar {
+            display: flex;
+            gap: 4px;
+            background-color: #f7f7f9;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+            padding: 6px 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .editor-btn {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 13px;
+            cursor: pointer;
+            color: #444;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+        }
+
+        .editor-btn:hover {
+            background-color: #2b122c;
+            color: white;
+            border-color: #2b122c;
+        }
+
+        .toolbar-separator {
+            border-left: 1px solid #ccc;
+            height: 20px;
+            margin: 0 4px;
+        }
+
+        /* AREA TEKS EDITABLE */
+        .editor-content,
+        .card-body {
+            font-family: 'Poppins', 'Segoe UI', -apple-system, sans-serif !important;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #2d3748;
+        }
+
+        .editor-content * {
+            font-family: inherit !important;
+        }
+
+        .editor-content {
+            width: 100%;
+            min-height: 130px;
+            max-height: 260px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 0 0 6px 6px;
+            padding: 12px 14px;
+            box-sizing: border-box;
+            background: white;
+            outline: none;
+        }
+
+        .editor-content:focus {
+            border-color: #2b122c;
+            box-shadow: 0 0 0 2px rgba(43, 18, 44, 0.1);
+        }
+
+        .editor-content ul,
+        .editor-content ol,
+        .card-body ul,
+        .card-body ol {
+            padding-left: 28px !important;
+            margin: 8px 0 !important;
+        }
+
+        .editor-content ul li,
+        .editor-content ol li,
+        .card-body ul li,
+        .card-body ol li {
+            margin-bottom: 4px;
+            padding-left: 4px;
+        }
+
+        .editor-content ul, .card-body ul { list-style-type: disc !important; }
+        .editor-content ol, .card-body ol { list-style-type: decimal !important; }
+
+        .editor-content img, .card-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 8px 0;
+            display: block;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .editor-content img.selected-img {
+            outline: 3px solid #ff2a8d;
+            box-shadow: 0 0 10px rgba(255, 42, 141, 0.4);
+        }
+
+        .modal-material-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .btn-modal-cancel {
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-modal-save {
+            background-color: #2b122c;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-modal-save:hover {
+            background-color: #3d1b3f;
+        }
+
+        .qr-link {
+            display: block;
+            text-decoration: none;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .qr-link:hover {
+            transform: scale(1.03);
+            opacity: 0.95;
+        }
+
+        /* --- STYLING TERBARU UNTUK CONFETTI --- */
+        .confetti-container {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            overflow: hidden !important;
+            z-index: 99 !important; /* Diletakkan melayang di atas stage */
+        }
+
+        .svg-confetti-layer {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            pointer-events: none !important;
+            border: none !important;
+            display: block !important;
+        }
+
+        /* Styling Trophy SVG */
+        .main-trophy-svg {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.7));
+            animation: trophyFloat 3s infinite ease-in-out;
+            position: relative;
+            z-index: 5;
+        }
+
+        @keyframes trophyFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-12px) scale(1.06);
+                filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.9));
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="class-game-wrapper">
-        <!-- GAME MODE VIEW -->
+    <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+
+    <!-- 1. TAMPILAN RINGKASAN MATERI SEBELUM KUIS -->
+    <div class="intro-summary-wrapper" id="summarySection">
+        <div class="summary-actions">
+            <button class="btn-edit-materi" onclick="openEditMaterialModal()">
+                <i class="far fa-edit"></i> Edit Materi
+            </button>
+        </div>
+
+        <div class="cards-container">
+            <div class="info-card">
+                <div class="card-title" id="title1"></div>
+                <div class="card-body" id="body1"></div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-title" id="title2"></div>
+                <div class="card-body" id="body2"></div>
+            </div>
+        </div>
+
+        <button class="btn-lanjut" onclick="startQuiz()">Lanjut ke kuis -&gt;</button>
+    </div>
+
+    <!-- MODAL POPUP EDIT MATERI -->
+    <div class="edit-material-modal" id="editMaterialModal">
+        <div class="edit-material-content">
+            <div class="edit-material-header">
+                <h2><i class="far fa-edit"></i> Edit Materi Ringkasan</h2>
+                <button class="edit-material-close" onclick="closeEditMaterialModal()">&times;</button>
+            </div>
+            <form id="materialForm">
+                <div class="material-form-group">
+                    <label for="inputTitle1">Judul Kartu 1</label>
+                    <input type="text" id="inputTitle1" required>
+                </div>
+                <div class="material-form-group">
+                    <label>Isi Kartu 1 <small style="font-weight: normal; color: #888;">(Klik gambar lalu tekan tombol + / - untuk mengubah ukuran)</small></label>
+                    <div class="editor-toolbar">
+                        <button type="button" class="editor-btn" onclick="formatText('bold')" title="Tebal (Bold)"><i class="fas fa-bold"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('italic')" title="Miring (Italic)"><i class="fas fa-italic"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('underline')" title="Garis Bawah (Underline)"><i class="fas fa-underline"></i></button>
+                        
+                        <span class="toolbar-separator"></span>
+                        
+                        <button type="button" class="editor-btn" onclick="formatText('justifyLeft')" title="Rata Kiri"><i class="fas fa-align-left"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('justifyCenter')" title="Rata Tengah"><i class="fas fa-align-center"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('justifyRight')" title="Rata Kanan"><i class="fas fa-align-right"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('justifyFull')" title="Rata Kiri Kanan (Justify)"><i class="fas fa-align-justify"></i></button>
+                        
+                        <span class="toolbar-separator"></span>
+                        
+                        <button type="button" class="editor-btn" onclick="formatText('insertUnorderedList')" title="Daftar Simbol (Bullets)"><i class="fas fa-list-ul"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('insertOrderedList')" title="Daftar Angka (1, 2, 3)"><i class="fas fa-list-ol"></i></button>
+                        
+                        <span class="toolbar-separator"></span>
+
+                        <button type="button" class="editor-btn" onclick="formatText('indent')" title="Masuk Paragraf / Tab"><i class="fas fa-indent"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('outdent')" title="Keluar Paragraf"><i class="fas fa-outdent"></i></button>
+                        
+                        <span class="toolbar-separator"></span>
+
+                        <button type="button" class="editor-btn" onclick="formatText('superscript')" title="Pangkat Atas"><i class="fas fa-superscript"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('subscript')" title="Pangkat Bawah"><i class="fas fa-subscript"></i></button>
+                        <button type="button" class="editor-btn" onclick="openMathSymbols()" title="Sisipkan Simbol Matematika/Sains"><i class="fas fa-square-root-variable"></i></button>
+
+                        <span class="toolbar-separator"></span>
+
+                        <button type="button" class="editor-btn" onclick="triggerImageUpload('inputBody1')" title="Unggah Gambar"><i class="fas fa-image"></i> Gambar</button>
+                        <button type="button" class="editor-btn" onclick="resizeSelectedImage(1.1)" title="Perbesar Gambar (+)"><i class="fas fa-search-plus"></i></button>
+                        <button type="button" class="editor-btn" onclick="resizeSelectedImage(0.9)" title="Perkecil Gambar (-)"><i class="fas fa-search-minus"></i></button>
+                        <button type="button" class="editor-btn" onclick="resetSelectedImageSize()" title="Reset Ukuran Gambar"><i class="fas fa-compress-arrows-alt"></i></button>
+                    </div>
+                    <div class="editor-content" id="inputBody1" contenteditable="true"></div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+                <div class="material-form-group">
+                    <label for="inputTitle2">Judul Kartu 2</label>
+                    <input type="text" id="inputTitle2" required>
+                </div>
+                <div class="material-form-group">
+                    <label>Isi Kartu 2 <small style="font-weight: normal; color: #888;">(Klik gambar lalu tekan tombol + / - untuk mengubah ukuran)</small></label>
+                    <div class="editor-toolbar">
+                        <button type="button" class="editor-btn" onclick="formatText('bold')" title="Tebal (Bold)"><i class="fas fa-bold"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('italic')" title="Miring (Italic)"><i class="fas fa-italic"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('underline')" title="Garis Bawah (Underline)"><i class="fas fa-underline"></i></button>
+                        
+                        <span class="toolbar-separator"></span>
+                        
+                        <button type="button" class="editor-btn" onclick="formatText('justifyLeft')" title="Rata Kiri"><i class="fas fa-align-left"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('justifyCenter')" title="Rata Tengah"><i class="fas fa-align-center"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('justifyRight')" title="Rata Kanan"><i class="fas fa-align-right"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('justifyFull')" title="Rata Kiri Kanan (Justify)"><i class="fas fa-align-justify"></i></button>
+                        
+                        <span class="toolbar-separator"></span>
+                        
+                        <button type="button" class="editor-btn" onclick="formatText('insertUnorderedList')" title="Daftar Simbol (Bullets)"><i class="fas fa-list-ul"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('insertOrderedList')" title="Daftar Angka (1, 2, 3)"><i class="fas fa-list-ol"></i></button>
+                        
+                        <span class="toolbar-separator"></span>
+
+                        <button type="button" class="editor-btn" onclick="formatText('indent')" title="Masuk Paragraf / Tab"><i class="fas fa-indent"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('outdent')" title="Keluar Paragraf"><i class="fas fa-outdent"></i></button>
+                        
+                        <span class="toolbar-separator"></span>
+
+                        <button type="button" class="editor-btn" onclick="formatText('superscript')" title="Pangkat Atas"><i class="fas fa-superscript"></i></button>
+                        <button type="button" class="editor-btn" onclick="formatText('subscript')" title="Pangkat Bawah"><i class="fas fa-subscript"></i></button>
+                        <button type="button" class="editor-btn" onclick="openMathSymbols()" title="Sisipkan Simbol Matematika/Sains"><i class="fas fa-square-root-variable"></i></button>
+
+                        <span class="toolbar-separator"></span>
+
+                        <button type="button" class="editor-btn" onclick="triggerImageUpload('inputBody2')" title="Unggah Gambar"><i class="fas fa-image"></i> Gambar</button>
+                        <button type="button" class="editor-btn" onclick="resizeSelectedImage(1.1)" title="Perbesar Gambar (+)"><i class="fas fa-search-plus"></i></button>
+                        <button type="button" class="editor-btn" onclick="resizeSelectedImage(0.9)" title="Perkecil Gambar (-)"><i class="fas fa-search-minus"></i></button>
+                        <button type="button" class="editor-btn" onclick="resetSelectedImageSize()" title="Reset Ukuran Gambar"><i class="fas fa-compress-arrows-alt"></i></button>
+                    </div>
+                    <div class="editor-content" id="inputBody2" contenteditable="true"></div>
+                </div>
+
+                <div class="modal-material-actions">
+                    <button type="button" class="btn-modal-cancel" onclick="closeEditMaterialModal()">Batal</button>
+                    <button type="submit" class="btn-modal-save">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. GAME MODE VIEW -->
+    <div class="class-game-wrapper" id="quizSection" style="display: none;">
         <div class="class-game-container" id="gameContainer" style="display: flex; flex-direction: column;">
-            <!-- Header with Scores -->
             <div class="class-game-header">
                 <div class="scores-display">
                     <div class="score-team">
@@ -28,7 +472,6 @@
                 <p>Jawab soal ini untuk menarik tambang</p>
             </div>
 
-            <!-- Rope Game Area -->
             <div class="rope-area">
                 <div class="rope-wrapper">
                     <img src="/images/tarik.png" id="rope-img" alt="Tarik Tambang">
@@ -36,22 +479,22 @@
                 </div>
             </div>
 
-            <!-- Mode Selection -->
             <div class="mode-switch">
                 <button id="modeQrBtn" class="mode-btn active">Scan QR</button>
                 <button id="modeScreenBtn" class="mode-btn">Main di Layar</button>
             </div>
 
-            <!-- QR Codes untuk Tim -->
             <div class="qr-codes-container" id="qrModeContainer">
                 <div class="team-qr">
                     <div class="team-label">
                         <i class="fas fa-users"></i>
                         <h3>TIM 1</h3>
                     </div>
-                    <div class="qr-code-box">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http://localhost:3000/play?team=1&level=low" alt="QR Code Tim 1">
-                    </div>
+                    <a href="/play?team=1&level=low" target="_blank" class="qr-link" title="Buka Halaman Main Tim 1 di Tab Baru">
+                        <div class="qr-code-box">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&amp;data=http://localhost:3000/play?team=1&amp;level=low" alt="QR Code Tim 1">
+                        </div>
+                    </a>
                 </div>
 
                 <div class="team-qr">
@@ -59,15 +502,24 @@
                         <i class="fas fa-users"></i>
                         <h3>TIM 2</h3>
                     </div>
-                    <div class="qr-code-box">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http://localhost:3000/play?team=2&level=low" alt="QR Code Tim 2">
-                    </div>
+                    <a href="/play?team=2&level=low" target="_blank" class="qr-link" title="Buka Halaman Main Tim 2 di Tab Baru">
+                        <div class="qr-code-box">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&amp;data=http://localhost:3000/play?team=2&amp;level=low" alt="QR Code Tim 2">
+                        </div>
+                    </a>
                 </div>
             </div>
 
-            <!-- MAIN SCREEN DISPLAY MODE -->
             <div id="mainScreenMode" class="main-screen-mode" style="display: none;">
-                <!-- Main Screen Header -->
+                <div class="timer-container" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px;">
+                    <div class="timer-box" style="background: rgba(0, 0, 0, 0.3); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-clock" style="color: #ff2a8d; font-size: 18px;"></i>
+                        <span id="mainTimerText" style="font-size: 20px; font-weight: bold; color: #fff;">10:00</span>
+                    </div>
+                    <button class="btn-edit-timer" onclick="openTimerModal()" title="Edit Durasi Waktu" style="background: #2b122c; border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 8px 12px; border-radius: 8px; cursor: pointer;">
+                        <i class="fas fa-cog"></i> Edit Waktu
+                    </button>
+                </div>
                 <div class="main-screen-display-header">
                     <h1 id="mainGameTitle">Jawab soal ini untuk menarik tambang</h1>
                     <div class="main-progress-bar">
@@ -75,7 +527,6 @@
                     </div>
                 </div>
 
-                <!-- Scores & Rope -->
                 <div class="main-screen-section">
                     <div class="main-scores-display">
                         <div class="main-score-team">
@@ -95,9 +546,7 @@
                     </div>
                 </div>
 
-                <!-- Questions Section -->
                 <div class="main-questions-container">
-                    <!-- Tim 1 Question -->
                     <div class="main-team-question-box" id="team1QuestionBox">
                         <div class="main-question-label">
                             <span class="main-team-indicator tim-1">TIM 1</span>
@@ -121,11 +570,14 @@
                                     <span class="main-opsi-letter">D</span>
                                     <span class="main-opsi-text" id="mainOpsi1D">-</span>
                                 </button>
+                                <button class="main-opsi-btn" data-opsi="E" data-team="1">
+                                    <span class="main-opsi-letter">E</span>
+                                    <span class="main-opsi-text" id="mainOpsi1E">-</span>
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tim 2 Question -->
                     <div class="main-team-question-box" id="team2QuestionBox">
                         <div class="main-question-label">
                             <span class="main-team-indicator tim-2">TIM 2</span>
@@ -149,18 +601,20 @@
                                     <span class="main-opsi-letter">D</span>
                                     <span class="main-opsi-text" id="mainOpsi2D">-</span>
                                 </button>
+                                <button class="main-opsi-btn" data-opsi="E" data-team="2">
+                                    <span class="main-opsi-letter">E</span>
+                                    <span class="main-opsi-text" id="mainOpsi2E">-</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Main Screen Status -->
                 <div class="main-screen-status-bar">
                     <span id="mainStatusText">Menunggu Tim...</span>
                 </div>
             </div>
 
-            <!-- Action Buttons -->
             <div class="class-game-footer">
                 <button id="refreshBtn" class="btn-refresh">
                     <i class="fas fa-sync-alt"></i> Refresh
@@ -173,83 +627,265 @@
                 </a>
             </div>
         </div>
+    </div> <!-- Tanda penutup class-game-wrapper sudah dipisahkan dari Win Screen -->
 
-        <!-- WIN SCREEN - INTEGRATED VIEW -->
-        <div id="winScreen" class="win-screen-integrated" style="display: none;">
-            <div class="confetti-container" id="confetti"></div>
-            
-            <!-- Win Header with Scores -->
-            <div class="win-header">
-                <div class="win-scores-top">
-                    <div class="win-score-column">
-                        <h3>Skor Tim 1</h3>
-                        <p class="win-score-value-top" id="winScoreTeam1Top">0</p>
-                    </div>
-                    <div class="win-title-center">
-                        <h1 id="winTitle">TIM 1 MENANG</h1>
-                    </div>
-                    <div class="win-score-column">
-                        <h3>Skor Tim 2</h3>
-                        <p class="win-score-value-top" id="winScoreTeam2Top">0</p>
-                    </div>
+    <!-- 3. WIN SCREEN (DILAYARKAN TERPISAH SEBAGAI LAYER FIX DILUAR GAME WRAPPER) -->
+    <div id="winScreen" class="win-screen-integrated" style="display: none;">
+        <div class="confetti-container" id="confetti">
+            <object data="/images/confetti.svg" type="image/svg+xml" class="svg-confetti-layer layer-1"></object>
+            <object data="/images/convetti1.svg" type="image/svg+xml" class="svg-confetti-layer layer-2"></object>
+            <object data="/images/confetti2.svg" type="image/svg+xml" class="svg-confetti-layer layer-3"></object>
+        </div>
+
+        <div class="win-header">
+            <h1 id="winTitle">TIM 1 MENANG</h1>
+            <p class="win-level-subtitle" id="winLevelSubtitle">Low Level</p>
+            <p class="win-message">Selamat! Kekompakan tim kalian berhasil menaklukkan tantangan ini!</p>
+
+            <div class="win-scores-row">
+                <div class="score-box team-1-score">
+                    SKOR: <span id="winScoreTeam1Top">10</span>
                 </div>
-                <p class="win-level">Low Level</p>
-                <p class="win-message">Jawab soal ini untuk menang bersama tim mu</p>
-            </div>
-
-            <!-- Rope Game Area with Trophy -->
-            <div class="rope-area">
-                <div class="rope-wrapper">
-                    <img src="/images/tarik.png" id="rope-img-win" alt="Tarik Tambang" class="rope-img-win">
-                    <div class="center-line"></div>
+                <div class="score-box team-2-score">
+                    SKOR: <span id="winScoreTeam2Top">2</span>
                 </div>
             </div>
+        </div>
 
-            <!-- Winner Trophy Display -->
-            <div class="trophy-display">
-                <div class="trophy-icon-large">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <div class="trophy-info">
-                    <p class="trophy-label" id="trophyLabel">SKOR TIM 1</p>
-                    <p class="trophy-score" id="trophyScore">0</p>
+        <div class="win-stage-container">
+            <img src="/images/tim_1.png" id="rope-img-win" alt="Tarik Tambang Pemenang" class="rope-img-win">
+
+            <div class="center-beam">
+                <div class="crystal-top">💎</div>
+            </div>
+
+            <div class="stone-pedestal">
+                <div class="pedestal-front">
+                    <div class="neon-line-cyan"></div>
+                    <div class="neon-line-pink"></div>
                 </div>
             </div>
 
-            <!-- QR Codes -->
-            <div class="win-qr-codes-container">
-                <div class="win-team-qr">
-                    <h3>TIM 1</h3>
-                    <div class="win-qr-box">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:3000/play?team=1%26level=low" alt="QR Code Tim 1">
-                    </div>
-                </div>
-                <div class="win-team-qr">
-                    <h3>TIM 2</h3>
-                    <div class="win-qr-box">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:3000/play?team=2%26level=low" alt="QR Code Tim 2">
-                    </div>
-                </div>
+            <div class="main-trophy">
+                <img src="/images/trophy.svg" alt="Trophy Pemenang" class="main-trophy-svg">
             </div>
+        </div>
 
-            <!-- Buttons -->
-            <div class="win-buttons">
-                <button id="winRefreshBtn" class="btn-win-refresh">
-                    <i class="fas fa-sync-alt"></i> Refresh
-                </button>
-                <a href="/dashboard" class="btn-win-back">
-                    <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
-                </a>
-            </div>
+        <div class="win-buttons-row">
+            <button id="winRefreshBtn" class="btn-neon btn-purple">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <a href="/dashboard" class="btn-neon btn-cyan">
+                <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
+            </a>
         </div>
     </div>
 
     <script>
-        // Set level untuk game.js
         window.gameLevel = 'low';
+        let activeEditorTarget = null;
+        let selectedImage = null;
+
+        function startQuiz() {
+            document.getElementById('summarySection').style.display = 'none';
+            document.getElementById('quizSection').style.display = 'block';
+        }
+
+        /* FUNGSI OTOMATIS MENJALANKAN ANIMASI CONFETTI PAS KEMENANGAN TERJADI */
+        function triggerVictoryConfetti() {
+            if (typeof confetti === 'function') {
+                var duration = 4 * 1000;
+                var animationEnd = Date.now() + duration;
+                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+                function randomInRange(min, max) {
+                    return Math.random() * (max - min) + min;
+                }
+
+                var interval = setInterval(function() {
+                    var timeLeft = animationEnd - Date.now();
+                    if (timeLeft <= 0) {
+                        return clearInterval(interval);
+                    }
+                    var particleCount = 50 * (timeLeft / duration);
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                }, 250);
+            }
+        }
+
+        // Observer untuk memantau kapan winScreen aktif
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.target.id === 'winScreen' && mutation.target.style.display !== 'none') {
+                    triggerVictoryConfetti();
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const winElem = document.getElementById('winScreen');
+            if (winElem) {
+                observer.observe(winElem, { attributes: true, attributeFilter: ['style'] });
+            }
+        });
+
+        function formatText(command, value = null) {
+            document.execCommand(command, false, value);
+        }
+
+        function openMathSymbols() {
+            const symbols = ["√", "π", "±", "∞", "θ", "≤", "≥", "≠", "Δ", "α", "β", "∑", "∫"];
+            const choice = prompt("Pilih atau ketik simbol yang ingin dimasukkan:\n" + symbols.join("   "));
+            if (choice && choice.trim() !== "") {
+                document.execCommand('insertText', false, choice.trim());
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const editors = document.querySelectorAll('.editor-content');
+
+            editors.forEach(editor => {
+                editor.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+                    document.execCommand('insertText', false, text);
+                });
+
+                editor.addEventListener('keydown', function(e) {
+                    if (e.key === 'Tab') {
+                        e.preventDefault();
+                        if (e.shiftKey) {
+                            document.execCommand('outdent', false, null);
+                        } else {
+                            document.execCommand('indent', false, null);
+                        }
+                    }
+                });
+            });
+        });
+
+        function triggerImageUpload(targetEditorId) {
+            activeEditorTarget = document.getElementById(targetEditorId);
+            
+            const option = confirm("Klik 'OK' untuk memilih file gambar dari perangkat, atau 'Batal' untuk memasukkan URL gambar.");
+            
+            if (option) {
+                document.getElementById('imageFileInput').click();
+            } else {
+                const url = prompt("Masukkan URL Gambar:");
+                if (url && url.trim() !== "") {
+                    insertImageToEditor(url);
+                }
+            }
+        }
+
+        document.getElementById('imageFileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    insertImageToEditor(evt.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+            this.value = '';
+        });
+
+        function insertImageToEditor(src) {
+            if (!activeEditorTarget) return;
+            activeEditorTarget.focus();
+            const imgHtml = `<img src="${src}" alt="Gambar Materi" style="width: 80%;">`;
+            document.execCommand('insertHTML', false, imgHtml);
+        }
+
+        document.addEventListener('click', function(e) {
+            if (selectedImage && e.target !== selectedImage && !e.target.closest('.editor-toolbar')) {
+                selectedImage.classList.remove('selected-img');
+                selectedImage = null;
+            }
+
+            if (e.target.tagName === 'IMG' && e.target.closest('.editor-content')) {
+                selectedImage = e.target;
+                selectedImage.classList.add('selected-img');
+                
+                if (e.detail === 2) {
+                    if (confirm("Apakah Anda yakin ingin menghapus gambar ini?")) {
+                        selectedImage.remove();
+                        selectedImage = null;
+                    }
+                }
+            }
+        });
+
+        function resizeSelectedImage(factor) {
+            if (!selectedImage) {
+                alert("Klik gambar di dalam editor terlebih dahulu untuk memilih gambar yang ingin diubah ukurannya.");
+                return;
+            }
+            const currentWidth = selectedImage.clientWidth;
+            const newWidth = currentWidth * factor;
+            selectedImage.style.width = newWidth + "px";
+            selectedImage.style.maxWidth = "100%";
+        }
+
+        function resetSelectedImageSize() {
+            if (!selectedImage) {
+                alert("Klik gambar di dalam editor terlebih dahulu.");
+                return;
+            }
+            selectedImage.style.width = "100%";
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if ((e.key === 'Delete' || e.key === 'Backspace') && selectedImage) {
+                e.preventDefault();
+                selectedImage.remove();
+                selectedImage = null;
+            }
+        });
+
+        function openEditMaterialModal() {
+            document.getElementById('inputTitle1').value = document.getElementById('title1').innerText.trim();
+            document.getElementById('inputBody1').innerHTML = document.getElementById('body1').innerHTML;
+
+            document.getElementById('inputTitle2').value = document.getElementById('title2').innerText.trim();
+            document.getElementById('inputBody2').innerHTML = document.getElementById('body2').innerHTML;
+
+            document.getElementById('editMaterialModal').classList.add('active');
+        }
+
+        function closeEditMaterialModal() {
+            if (selectedImage) {
+                selectedImage.classList.remove('selected-img');
+                selectedImage = null;
+            }
+            document.getElementById('editMaterialModal').classList.remove('active');
+        }
+
     </script>
+    <script src="/js/user-materials.js"></script>
     <script src="/js/game.js"></script>
     <script src="/js/main-screen.js"></script>
+
+    <div class="edit-material-modal" id="editTimerModal">
+        <div class="edit-material-content" style="max-width: 400px;">
+            <div class="edit-material-header">
+                <h2><i class="fas fa-clock"></i> Edit Durasi Waktu</h2>
+                <button class="edit-material-close" onclick="closeTimerModal()">&times;</button>
+            </div>
+            <form id="timerForm" onsubmit="saveTimerSetting(event)">
+                <div class="material-form-group">
+                    <label for="inputDurationMinutes">Durasi Kuis (dalam Menit):</label>
+                    <input type="number" id="inputDurationMinutes" min="1" max="180" value="10" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                </div>
+                <div class="modal-material-actions">
+                    <button type="button" class="btn-modal-cancel" onclick="closeTimerModal()">Batal</button>
+                    <button type="submit" class="btn-modal-save">Simpan & Reset Timer</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 </body>
 </html>

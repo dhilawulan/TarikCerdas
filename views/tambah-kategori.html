@@ -1,60 +1,191 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Kategori - Buat Kategori Baru</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="/js/theme.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambahkan Kategori - TarikCerdas</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-    <div class="tambah-soal-wrapper">
-        <div class="tambah-soal-container">
-            <div class="tambah-soal-header">
-                <div class="header-icon">⚙️</div>
-                <h1>Tambahkan Kategori</h1>
-                <p>Buat Kategori Baru</p>
-            </div>
-
-            <div class="form-section">
-                <label>Kategori</label>
-                <div id="kategoriTabs" class="kategori-tabs"></div>
-            </div>
-
-            <div class="form-section">
-                <div class="custom-kategori-input">
-                    <input type="text" id="newCategoryInput" placeholder="Masukkan nama kategori baru..." />
-                    <button type="button" id="addCategoryBtn" class="btn-add-custom">
-                        <i class="fas fa-plus"></i> Tambah Kategori
-                    </button>
-                </div>
-                <div id="categoryTagList" class="custom-kategori-list"></div>
-            </div>
-
-            <div class="form-section selected-kategori-box">
-                <div class="selected-kategori-heading">
-                    <strong>Pilih Kategori</strong>
-                    <button type="button" id="clearCategoriesBtn" class="btn-clear">
-                        <i class="fas fa-trash"></i> Hapus
-                    </button>
-                </div>
-                <div id="selectedTabLabel" class="selected-kategori-display">Low</div>
-            </div>
-
-            <div class="form-footer kategori-action-footer">
-                <button type="button" id="saveCategoriesBtn" class="btn-submit">Simpan</button>
-            </div>
-
-            <div class="form-footer">
-                <a href="/dashboard" class="btn-back">
-                    <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
-                </a>
-            </div>
+  <div class="kategori-wrapper">
+    <div class="kategori-container">
+      
+      <!-- Header -->
+      <div class="kategori-header">
+        <div class="icon-badge">
+          <i class="bi bi-folder-plus"></i>
         </div>
-    </div>
+        <h1>Tambahkan Kategori</h1>
+        <p>Buat dan kelola kategori soal kuis sesuai kebutuhan</p>
+      </div>
 
-    <script src="/js/tambah-kategori.js"></script>
+      <!-- Form Input -->
+      <div class="input-card-section">
+        <label for="inputKategori">Nama Kategori Baru</label>
+        <div class="input-group-custom">
+          <input type="text" id="inputKategori" placeholder="Contoh: Pemrograman Web, Jaringan..." autocomplete="off">
+          <button type="button" id="btnTambah" class="btn-tambah">
+            <i class="bi bi-plus-lg"></i> Tambah
+          </button>
+        </div>
+      </div>
+
+      <!-- Container Daftar Kategori Terbuat -->
+      <div class="kategori-list-section">
+        <div class="list-header">
+          <div class="list-title">
+            <span>Daftar Kategori</span>
+            <span class="badge-count" id="countBadge">0 Kategori</span>
+          </div>
+          <button type="button" class="btn-clear-all" id="btnClearAll" title="Hapus Semua Kategori">
+            <i class="bi bi-trash3"></i> Hapus Semua
+          </button>
+        </div>
+
+        <!-- Tag Container -->
+        <div class="tags-wrapper" id="tagsWrapper">
+          <!-- Tag item akan dirender lewat JS -->
+          <div class="empty-state" id="emptyState">
+            <i class="bi bi-inbox"></i>
+            <p>Belum ada kategori kustom yang ditambahkan</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="kategori-actions">
+        <button type="button" class="btn-submit-main" id="btnSimpan">
+          <i class="bi bi-check-circle-fill"></i> Simpan & Selesai
+        </button>
+        <a href="/dashboard" class="btn-back-dashboard">
+          <i class="bi bi-arrow-left"></i> Kembali ke Dashboard
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputKategori = document.getElementById('inputKategori');
+      const btnTambah = document.getElementById('btnTambah');
+      const btnClearAll = document.getElementById('btnClearAll');
+      const tagsWrapper = document.getElementById('tagsWrapper');
+      const emptyState = document.getElementById('emptyState');
+      const countBadge = document.getElementById('countBadge');
+      const btnSimpan = document.getElementById('btnSimpan');
+
+      // Kategori kustom disimpan per akun di server.
+      let categories = [];
+
+      function renderCategories() {
+        // Clear isi wrapper kecuali empty state
+        tagsWrapper.innerHTML = '';
+
+        if (categories.length === 0) {
+          tagsWrapper.appendChild(emptyState);
+          emptyState.style.display = 'block';
+          btnClearAll.style.display = 'none';
+          countBadge.textContent = '0 Kategori';
+          return;
+        }
+
+        emptyState.style.display = 'none';
+        btnClearAll.style.display = 'inline-flex';
+        countBadge.textContent = `${categories.length} Kategori`;
+
+        categories.forEach((cat, index) => {
+          const tag = document.createElement('div');
+          tag.className = 'category-chip';
+          tag.innerHTML = `
+            <span>${cat}</span>
+            <button type="button" class="chip-remove" onclick="removeCategory(${index})" title="Hapus ${cat}">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          `;
+          tagsWrapper.appendChild(tag);
+        });
+      }
+
+      // Tambah Kategori
+      function addCategory() {
+        const value = inputKategori.value.trim();
+        if (!value) return;
+
+        if (categories.includes(value)) {
+          alert('Kategori sudah ada!');
+          return;
+        }
+
+        categories.push(value);
+        inputKategori.value = '';
+        renderCategories();
+      }
+
+      btnTambah.addEventListener('click', addCategory);
+
+      inputKategori.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          addCategory();
+        }
+      });
+
+      // Hapus per item (dibuat global agar onclick di innerHTML berfungsi)
+      window.removeCategory = function(index) {
+        categories.splice(index, 1);
+        renderCategories();
+      };
+
+      // Hapus Semua
+      btnClearAll.addEventListener('click', function() {
+        if (confirm('Apakah Anda yakin ingin menghapus semua kategori kustom?')) {
+          categories = [];
+          renderCategories();
+        }
+      });
+
+      // Simpan & Kembali
+      btnSimpan.addEventListener('click', async function() {
+        try {
+          const response = await fetch('/api/categories', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ categories })
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'Gagal menyimpan kategori.');
+          alert('Kategori berhasil disimpan!');
+          window.location.href = '/dashboard';
+        } catch (error) {
+          console.error('Gagal menyimpan kategori:', error);
+          alert(error.message);
+        }
+      });
+
+      // Render kategori milik akun yang sedang login.
+      fetch('/api/categories')
+        .then(response => {
+          if (!response.ok) throw new Error('Gagal mengambil kategori.');
+          return response.json();
+        })
+        .then(savedCategories => {
+          categories = savedCategories
+            .map(category => category.name)
+            .filter(name => !['low', 'middle', 'high'].includes(name.toLowerCase()));
+          renderCategories();
+        })
+        .catch(error => {
+          console.error('Gagal memuat kategori:', error);
+          alert('Gagal memuat kategori. Silakan muat ulang halaman.');
+        });
+    });
+  </script>
+
 </body>
 </html>
-

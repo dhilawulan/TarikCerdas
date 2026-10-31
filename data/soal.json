@@ -1,767 +1,647 @@
 [
   {
-    "pertanyaan": "Perangkat keras adalah…",
-    "opsiA": "Program komputer",
-    "opsiB": "Komponen fisik komputer",
-    "opsiC": "Data digital",
-    "opsiD": "Jaringan internet komputer",
-    "jawaban": "Komponen fisik komputer",
-    "level": "low"
+    "id": "soal-088",
+    "pertanyaan": "Cara berpikir yang digunakan untuk menyelesaikan masalah secara logis, sistematis, dan terstruktur disebut ....",
+    "opsiA": "Berpikir kreatif",
+    "opsiB": "Berpikir komputasional",
+    "opsiC": "Berpikir bebas",
+    "opsiD": "Berpikir spontan",
+    "opsiE": "Berpikir praktis",
+    "jawaban": "Berpikir komputasional",
+    "level": "low",
+    "opsi": {
+      "A": "Berpikir kreatif",
+      "B": "Berpikir komputasional",
+      "C": "Berpikir bebas",
+      "D": "Berpikir spontan"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "Contoh perangkat input adalah…",
-    "opsiA": "Monitor",
-    "opsiB": "Keyboard",
-    "opsiC": "Printer",
-    "opsiD": "Speaker",
-    "jawaban": "Keyboard",
-    "level": "low"
+    "id": "soal-089",
+    "pertanyaan": "Tujuan utama melakukan dekomposisi adalah ....",
+    "opsiA": "Membuat masalah menjadi lebih kompleks",
+    "opsiB": "Menghilangkan semua informasi",
+    "opsiC": "Memecah masalah menjadi bagian yang lebih kecil",
+    "opsiD": "Mengurutkan data",
+    "opsiE": "Menyembunyikan detail masalah",
+    "jawaban": "Memecah masalah menjadi bagian yang lebih kecil",
+    "level": "low",
+    "opsi": {
+      "A": "Membuat masalah menjadi lebih kompleks",
+      "B": "Menghilangkan semua informasi",
+      "C": "Memecah masalah menjadi bagian yang lebih kecil",
+      "D": "Mengurutkan data",
+      "E": "Menyembunyikan detail masalah"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "CPU berfungsi sebagai…",
-    "opsiA": "Penyimpanan data",
-    "opsiB": "Alat input",
-    "opsiC": "Pusat pemrosesan",
-    "opsiD": "Alat output",
-    "jawaban": "Pusat pemrosesan",
-    "level": "low"
+    "id": "soal-090",
+    "pertanyaan": "Proses menemukan kesamaan atau keteraturan dalam suatu masalah disebut ....",
+    "opsiA": "Abstraksi",
+    "opsiB": "Algoritma",
+    "opsiC": "Dekomposisi",
+    "opsiD": "Pengenalan pola",
+    "opsiE": "Evaluasi",
+    "jawaban": "Pengenalan pola",
+    "level": "low",
+    "opsi": {
+      "A": "Abstraksi",
+      "B": "Algoritma",
+      "C": "Dekomposisi",
+      "D": "Pengenalan pola",
+      "E": "Evaluasi"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "Monitor termasuk perangkat…",
-    "opsiA": "Input",
-    "opsiB": "Proses",
-    "opsiC": "Output",
-    "opsiD": "Penyimpanan",
-    "jawaban": "Output",
-    "level": "low"
+    "id": "soal-091",
+    "pertanyaan": "Proses memilih informasi yang penting dan mengabaikan informasi yang tidak diperlukan disebut ....",
+    "opsiA": "Abstraksi",
+    "opsiB": "Dekomposisi",
+    "opsiC": "Pencarian",
+    "opsiD": "Pengurutan",
+    "opsiE": "Generalisasi",
+    "jawaban": "Abstraksi",
+    "level": "low",
+    "opsi": {
+      "A": "Abstraksi",
+      "B": "Dekomposisi",
+      "C": "Pencarian",
+      "D": "Pengurutan",
+      "E": "Generalisasi"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "RAM berfungsi untuk…",
-    "opsiA": "Menyimpan data sementara",
-    "opsiB": "Menyimpan data permanen",
-    "opsiC": "Menampilkan gambar",
-    "opsiD": "Menghubungkan internet",
-    "jawaban": "Menyimpan data sementara",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "SSD termasuk perangkat…",
-    "opsiA": "Input",
-    "opsiB": "Output",
-    "opsiC": "Penyimpanan",
-    "opsiD": "Proses",
-    "jawaban": "Penyimpanan",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Perangkat lunak adalah…",
-    "opsiA": "Komponen fisik",
-    "opsiB": "Program komputer",
-    "opsiC": "Kabel jaringan",
-    "opsiD": "Monitor",
-    "jawaban": "Program komputer",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Sistem operasi berfungsi untuk…",
-    "opsiA": "Menggambar",
-    "opsiB": "Menghubungkan pengguna dan hardware",
-    "opsiC": "Menyimpan data",
-    "opsiD": "Menghapus file",
-    "jawaban": "Menghubungkan pengguna dan hardware",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Contoh sistem operasi adalah…",
-    "opsiA": "Microsoft Word",
-    "opsiB": "Windows",
-    "opsiC": "Excel",
-    "opsiD": "Canva",
-    "jawaban": "Windows",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Aplikasi digunakan untuk…",
-    "opsiA": "Mengatur hardware",
-    "opsiB": "Membantu pekerjaan pengguna",
-    "opsiC": "Menghidupkan komputer",
-    "opsiD": "Menyimpan listrik",
-    "jawaban": "Membantu pekerjaan pengguna",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Bluetooth digunakan untuk…",
-    "opsiA": "Menampilkan gambar",
-    "opsiB": "Transfer data jarak dekat",
-    "opsiC": "Menyimpan file",
-    "opsiD": "Mengolah data",
-    "jawaban": "Transfer data jarak dekat",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Wi-Fi digunakan untuk…",
-    "opsiA": "Menghubungkan jaringan internet",
-    "opsiB": "Menyimpan file",
-    "opsiC": "Mengedit video",
-    "opsiD": "Menggambar",
-    "jawaban": "Menghubungkan jaringan internet",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Overheating berarti…",
-    "opsiA": "Komputer mati total",
-    "opsiB": "Komputer terlalu panas",
-    "opsiC": "Komputer lambat",
-    "opsiD": "Layar mati",
-    "jawaban": "Komputer terlalu panas",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Sistem bilangan biner terdiri dari…",
-    "opsiA": "0 dan 1",
-    "opsiB": "1 dan 2",
-    "opsiC": "0–9",
-    "opsiD": "Huruf",
-    "jawaban": "0 dan 1",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Bilangan biner digunakan oleh…",
-    "opsiA": "Manusia",
-    "opsiB": "Komputer",
-    "opsiC": "Printer",
-    "opsiD": "Buku",
-    "jawaban": "Komputer",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Keyboard berfungsi untuk…",
-    "opsiA": "Menampilkan data",
-    "opsiB": "Memasukkan data",
-    "opsiC": "Menyimpan data",
-    "opsiD": "Menghapus data",
-    "jawaban": "Memasukkan data",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Printer termasuk perangkat…",
-    "opsiA": "Input",
-    "opsiB": "Output",
-    "opsiC": "Proses",
-    "opsiD": "Penyimpanan",
-    "jawaban": "Output",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Hard disk berfungsi untuk…",
-    "opsiA": "Input data",
-    "opsiB": "Output data",
-    "opsiC": "Penyimpanan data",
-    "opsiD": "Memproses data",
-    "jawaban": "Penyimpanan data",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Contoh aplikasi adalah…",
-    "opsiA": "Windows",
-    "opsiB": "Linux",
-    "opsiC": "Microsoft Word",
-    "opsiD": "BIOS",
-    "jawaban": "Microsoft Word",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Closed source berarti…",
-    "opsiA": "Bebas digunakan",
-    "opsiB": "Tidak memiliki lisensi",
-    "opsiC": "Kode tertutup",
-    "opsiD": "Gratis",
-    "jawaban": "Kode tertutup",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Open source berarti…",
-    "opsiA": "Berbayar",
-    "opsiB": "Kode terbuka",
-    "opsiC": "Tidak bisa diubah",
-    "opsiD": "Tidak gratis",
-    "jawaban": "Kode terbuka",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "File adalah…",
-    "opsiA": "Perangkat keras",
-    "opsiB": "Data digital",
-    "opsiC": "Kabel",
-    "opsiD": "Software",
-    "jawaban": "Data digital",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Speaker berfungsi untuk…",
-    "opsiA": "Input suara",
-    "opsiB": "Output suara",
-    "opsiC": "Menyimpan suara",
-    "opsiD": "Memproses suara",
-    "jawaban": "Output suara",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Mouse digunakan untuk…",
-    "opsiA": "Mengetik",
-    "opsiB": "Menggerakkan kursor",
-    "opsiC": "Menyimpan data",
-    "opsiD": "Memproses data",
-    "jawaban": "Menggerakkan kursor",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Laptop termasuk…",
-    "opsiA": "Software",
-    "opsiB": "Hardware",
-    "opsiC": "Data",
-    "opsiD": "Jaringan",
-    "jawaban": "Hardware",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Jaringan digunakan untuk…",
-    "opsiA": "Menggambar",
-    "opsiB": "Berkomunikasi antar perangkat",
-    "opsiC": "Menyimpan data",
-    "opsiD": "Menghapus file",
-    "jawaban": "Berkomunikasi antar perangkat",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Data digital dapat berupa…",
-    "opsiA": "Gambar",
-    "opsiB": "Teks",
-    "opsiC": "Suara",
-    "opsiD": "Semua benar",
-    "jawaban": "Semua benar",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "CPU singkatan dari…",
-    "opsiA": "Central Process Unit",
-    "opsiB": "Central Processing Unit",
-    "opsiC": "Computer Personal Unit",
-    "opsiD": "Control Program Unit",
-    "jawaban": "Central Processing Unit",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Smartphone termasuk perangkat…",
-    "opsiA": "Input saja",
-    "opsiB": "Output saja",
-    "opsiC": "Sistem komputer",
-    "opsiD": "Penyimpanan saja",
-    "jawaban": "Sistem komputer",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Komputer digunakan untuk…",
-    "opsiA": "Mengolah data",
-    "opsiB": "Memasak",
-    "opsiC": "Mencuci",
-    "opsiD": "Menjahit",
-    "jawaban": "Mengolah data",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "sapi makan apa",
-    "opsiA": "rumput",
-    "opsiB": "soto",
-    "opsiC": "daging",
-    "opsiD": "Mouse",
-    "jawaban": "rumput",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Jika keyboard rusak, maka…",
-    "opsiA": "Tidak bisa mengetik",
-    "opsiB": "Tidak bisa melihat",
-    "opsiC": "Tidak bisa mendengar",
-    "opsiD": "Tidak bisa menyimpan",
-    "jawaban": "Tidak bisa mengetik",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Jika monitor mati, maka…",
-    "opsiA": "Tidak bisa input",
-    "opsiB": "Tidak bisa melihat output",
-    "opsiC": "Tidak bisa menyimpan",
-    "opsiD": "Tidak bisa memproses",
-    "jawaban": "Tidak bisa melihat output",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "pitul",
-    "opsiA": "jelek",
-    "opsiB": "jelleki",
-    "opsiC": "jelekkk",
-    "opsiD": "cantik tapi boong",
-    "jawaban": "jelekkk",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "Smartphone termasuk sistem karena…",
-    "opsiA": "Banyak warna",
-    "opsiB": "Banyak aplikasi",
-    "opsiC": "Terdiri dari hardware dan software",
-    "opsiD": "Mahal",
-    "jawaban": "Terdiri dari hardware dan software",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Jika baterai rusak maka…",
-    "opsiA": "Tidak bisa menyala tanpa charger",
-    "opsiB": "Tidak bisa mengetik",
-    "opsiC": "Tidak bisa melihat",
-    "opsiD": "Tidak bisa menyimpan",
-    "jawaban": "Tidak bisa menyala tanpa charger",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Open source lebih fleksibel karena…",
-    "opsiA": "Mahal",
-    "opsiB": "Kode bisa diubah",
-    "opsiC": "Tidak bisa dipakai",
-    "opsiD": "Terbatas",
-    "jawaban": "Kode bisa diubah",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Closed source biasanya…",
-    "opsiA": "Bebas diubah",
-    "opsiB": "Terbatas akses",
-    "opsiC": "Gratis",
-    "opsiD": "Tidak digunakan",
-    "jawaban": "Terbatas akses",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Sistem biner penting karena…",
-    "opsiA": "Mudah dibaca manusia",
-    "opsiB": "Digunakan komputer",
-    "opsiC": "Banyak angka",
-    "opsiD": "Kompleks",
-    "jawaban": "Digunakan komputer",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Data teks disimpan dalam bentuk…",
-    "opsiA": "Warna",
-    "opsiB": "Suara",
-    "opsiC": "Biner",
-    "opsiD": "Gambar",
-    "jawaban": "Biner",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Jika Wi-Fi lambat maka…",
-    "opsiA": "CPU rusak",
-    "opsiB": "Koneksi lemah",
-    "opsiC": "RAM rusak",
-    "opsiD": "Monitor mati",
-    "jawaban": "Koneksi lemah",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "CCTV lebih efisien karena…",
-    "opsiA": "Mahal",
-    "opsiB": "Otomatis",
-    "opsiC": "Manual",
-    "opsiD": "Lambat",
-    "jawaban": "Otomatis",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Transfer manual lebih lambat karena…",
-    "opsiA": "Banyak tenaga manusia",
-    "opsiB": "Cepat",
-    "opsiC": "Praktis",
-    "opsiD": "Modern",
-    "jawaban": "Banyak tenaga manusia",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Perangkat output berfungsi untuk…",
-    "opsiA": "Memasukkan data",
-    "opsiB": "Menampilkan data",
-    "opsiC": "Menyimpan data",
-    "opsiD": "Memproses data",
-    "jawaban": "Menampilkan data",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "Jika storage penuh maka…",
-    "opsiA": "Komputer cepat",
-    "opsiB": "Tidak bisa simpan data",
-    "opsiC": "Tidak bisa melihat",
-    "opsiD": "Tidak bisa mengetik",
-    "jawaban": "Tidak bisa simpan data",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "RAM mempengaruhi…",
-    "opsiA": "Tampilan",
-    "opsiB": "Kecepatan",
-    "opsiC": "Warna",
-    "opsiD": "Bentuk",
-    "jawaban": "Kecepatan",
-    "level": "middle"
-  },
-  {
-    "pertanyaan": "CPU memproses…",
+    "id": "soal-092",
+    "pertanyaan": "Serangkaian langkah yang disusun secara sistematis untuk menyelesaikan suatu masalah disebut ....",
     "opsiA": "Data",
-    "opsiB": "Listrik",
-    "opsiC": "Kabel",
-    "opsiD": "Monitor",
-    "jawaban": "Data",
-    "level": "middle"
+    "opsiB": "Algoritma",
+    "opsiC": "Pola",
+    "opsiD": "Abstraksi",
+    "opsiE": "Variabel",
+    "jawaban": "Algoritma",
+    "level": "low",
+    "opsi": {
+      "A": "Data",
+      "B": "Algoritma",
+      "C": "Pola",
+      "D": "Abstraksi",
+      "E": "Variabel"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "Jika file tidak terkirim via Bluetooth, kemungkinan…",
-    "opsiA": "Jarak jauh",
-    "opsiB": "CPU rusak",
-    "opsiC": "RAM besar",
-    "opsiD": "Monitor mati",
-    "jawaban": "Jarak jauh",
-    "level": "middle"
+    "id": "soal-093",
+    "pertanyaan": "Berikut yang merupakan bentuk penyajikan algoritma adalah ....",
+    "opsiA": "Deskriptif, pseudocode, dan flowchart",
+    "opsiB": "Tabel, grafik, dan gambar",
+    "opsiC": "Teks, audio, dan video",
+    "opsiD": "Angka, huruf, dan simbol",
+    "opsiE": "Diagram batang, lingkaran, dan garis",
+    "jawaban": "Deskriptif, pseudocode, dan flowchart",
+    "level": "low",
+    "opsi": {
+      "A": "Deskriptif, pseudocode, dan flowchart",
+      "B": "Tabel, grafik, dan gambar",
+      "C": "Teks, audio, dan video",
+      "D": "Angka, huruf, dan simbol",
+      "E": "Diagram batang, lingkaran, dan garis"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "Aplikasi TikTok termasuk…",
-    "opsiA": "OS",
-    "opsiB": "Aplikasi",
-    "opsiC": "Hardware",
-    "opsiD": "Driver",
-    "jawaban": "Aplikasi",
-    "level": "middle"
+    "id": "soal-094",
+    "pertanyaan": "Algoritma yang digunakan untuk menemukan data tertentu disebut ....",
+    "opsiA": "Sorting",
+    "opsiB": "Searching",
+    "opsiC": "Coding",
+    "opsiD": "Debugging",
+    "opsiE": "Parsing",
+    "jawaban": "Searching",
+    "level": "low",
+    "opsi": {
+      "A": "Sorting",
+      "B": "Searching",
+      "C": "Coding",
+      "D": "Debugging",
+      "E": "Parsing"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "Sistem komputer terdiri dari…",
-    "opsiA": "Hardware saja",
-    "opsiB": "Software saja",
-    "opsiC": "Hardware, software, user",
-    "opsiD": "Monitor saja",
-    "jawaban": "Hardware, software, user",
-    "level": "middle"
+    "id": "soal-095",
+    "pertanyaan": "Algoritma sorting digunakan untuk ....",
+    "opsiA": "Menghapus data",
+    "opsiB": "Mencari data",
+    "opsiC": "Mengurutkan data",
+    "opsiD": "Menyimpan data",
+    "opsiE": "Duplikasi data",
+    "jawaban": "Mengurutkan data",
+    "level": "low",
+    "opsi": {
+      "A": "Menghapus data",
+      "B": "Mencari data",
+      "C": "Mengurutkan data",
+      "D": "Menyimpan data",
+      "E": "Duplikasi data"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "Kamu ingin editing video, spesifikasi terbaik adalah…",
-    "opsiA": "RAM kecil",
-    "opsiB": "CPU cepat & RAM besar",
-    "opsiC": "Storage kecil",
-    "opsiD": "Tanpa GPU",
-    "jawaban": "CPU cepat & RAM besar",
-    "level": "high"
+    "id": "soal-096",
+    "pertanyaan": "Bentuk penulisan algoritma yang menggunakan bahasa sehari-hari disebut ....",
+    "opsiA": "Flowchart",
+    "opsiB": "Pseudocode",
+    "opsiC": "Deskriptif",
+    "opsiD": "Program",
+    "opsiE": "Bahasa mesin",
+    "jawaban": "Deskriptif",
+    "level": "low",
+    "opsi": {
+      "A": "Flowchart",
+      "B": "Pseudocode",
+      "C": "Deskriptif",
+      "D": "Program",
+      "E": "Bahasa mesin"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "Pilihan terbaik untuk sekolah adalah…",
-    "opsiA": "Gaming PC mahal",
-    "opsiB": "Laptop sesuai kebutuhan",
-    "opsiC": "Server",
-    "opsiD": "Supercomputer",
-    "jawaban": "Laptop sesuai kebutuhan",
-    "level": "high"
+    "id": "soal-097",
+    "pertanyaan": "Salah satu manfaat berpikir komputasional adalah ....",
+    "opsiA": "Membuat masalah menjadi lebih sulit",
+    "opsiB": "Membantu menyelesaikan masalah secara efektif dan efisien",
+    "opsiC": "Menghilangkan seluruh data",
+    "opsiD": "Membuat semua pekerjaan dilakukan komputer",
+    "opsiE": "Menghindari penggunaan logika manusia",
+    "jawaban": "Membantu menyelesaikan masalah secara efektif dan efisien",
+    "level": "low",
+    "opsi": {
+      "A": "Membuat masalah menjadi lebih sulit",
+      "B": "Membantu menyelesaikan masalah secara efektif dan efisien",
+      "C": "Menghilangkan seluruh data",
+      "D": "Membuat semua pekerjaan dilakukan komputer",
+      "E": "Menghindari penggunaan logika manusia"
+    },
+    "kategori": "low"
   },
   {
-    "pertanyaan": "Jika komputer sering panas, solusi terbaik…",
-    "opsiA": "Tambah aplikasi",
-    "opsiB": "Perbaiki sistem pendingin",
-    "opsiC": "Tambah file",
-    "opsiD": "Ganti keyboard",
-    "jawaban": "Perbaiki sistem pendingin",
-    "level": "high"
+    "id": "soal-098",
+    "pertanyaan": "Seorang siswa mendapat tugas membuat acara kelas. Ia membagi tugas menjadi menentukan tempat, waktu, perlengkapan, konsumsi, dan susunan acara. Konsep berpikir komputasional yang diterapkan adalah ....",
+    "opsiA": "Abstraksi",
+    "opsiB": "Dekomposisi",
+    "opsiC": "Pengenalan pola",
+    "opsiD": "Sorting",
+    "opsiE": "Searching",
+    "jawaban": "Dekomposisi",
+    "level": "middle",
+    "opsi": {
+      "A": "Abstraksi",
+      "B": "Dekomposisi",
+      "C": "Pengenalan pola",
+      "D": "Sorting",
+      "E": "Searching"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Mengapa memilih SSD?",
-    "opsiA": "Murah",
-    "opsiB": "Cepat dan efisien",
-    "opsiC": "Berat",
-    "opsiD": "Besar",
-    "jawaban": "Cepat dan efisien",
-    "level": "high"
+    "id": "soal-099",
+    "pertanyaan": "Perhatikan data berikut:\n70, 80, 70, 90, 80, 70\nSeorang siswa menyadari bahwa nilai 70 muncul paling banyak. Kegiatan tersebut merupakan contoh ....",
+    "opsiA": "Algoritma",
+    "opsiB": "Abstraksi",
+    "opsiC": "Pengenalan pola",
+    "opsiD": "Dekomposisi",
+    "opsiE": "Pengurutan data",
+    "jawaban": "Pengenalan pola",
+    "level": "middle",
+    "opsi": {
+      "A": "Algoritma",
+      "B": "Abstraksi",
+      "C": "Pengenalan pola",
+      "D": "Dekomposisi",
+      "E": "Pengurutan data"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Evaluasi: PC lambat → solusi terbaik?",
-    "opsiA": "Ganti mouse",
-    "opsiB": "Tambah RAM",
-    "opsiC": "Ganti layar",
-    "opsiD": "Tambah speaker",
-    "jawaban": "Tambah RAM",
-    "level": "high"
+    "id": "soal-100",
+    "pertanyaan": "Ketika mencari rute tercepat menuju sekolah, seorang siswa hanya memperhatikan jarak, kondisi jalan, dan kepadatan lalu lintas serta mengabaikan warna rumah yang dilewati. Hal tersebut merupakan penerapan ....",
+    "opsiA": "Algoritma",
+    "opsiB": "Abstraksi",
+    "opsiC": "Sorting",
+    "opsiD": "Searching",
+    "opsiE": "Dekomposisi",
+    "jawaban": "Abstraksi",
+    "level": "middle",
+    "opsi": {
+      "A": "Algoritma",
+      "B": "Abstraksi",
+      "C": "Sorting",
+      "D": "Searching",
+      "E": "Dekomposisi"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Mana yang lebih efisien?",
-    "opsiA": "Catatan manual",
-    "opsiB": "CCTV otomatis",
-    "opsiC": "Buku tulis",
-    "opsiD": "Poster",
-    "jawaban": "CCTV otomatis",
-    "level": "high"
+    "id": "soal-101",
+    "pertanyaan": "Perhatikan data berikut:\n25, 40, 15, 60, 30\nJika menggunakan sequential search untuk mencari angka 60, urutan pemeriksaannya adalah ....",
+    "opsiA": "25 → 15 → 30 → 60",
+    "opsiB": "60 → 30 → 15 → 40",
+    "opsiC": "25 → 40 → 15 → 60",
+    "opsiD": "30 → 60",
+    "opsiE": "25 → 60",
+    "jawaban": "25 → 40 → 15 → 60",
+    "level": "middle",
+    "opsi": {
+      "A": "25 → 15 → 30 → 60",
+      "B": "60 → 30 → 15 → 40",
+      "C": "25 → 40 → 15 → 60",
+      "D": "30 → 60",
+      "E": "25 → 60"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Mengapa sistem komputer penting?",
-    "opsiA": "Hiburan saja",
-    "opsiB": "Membantu pekerjaan manusia",
-    "opsiC": "Mahal",
-    "opsiD": "Sulit",
-    "jawaban": "Membantu pekerjaan manusia",
-    "level": "high"
+    "id": "soal-102",
+    "pertanyaan": "Perhatikan data yang sudah terurut berikut:\n10, 20, 30, 40, 50, 60, 70\nJika data tersebut dicari menggunakan binary search, data yang pertama kali diperiksa adalah ....",
+    "opsiA": "10",
+    "opsiB": "20",
+    "opsiC": "40",
+    "opsiD": "70",
+    "opsiE": "50",
+    "jawaban": "40",
+    "level": "middle",
+    "opsi": {
+      "A": "10",
+      "B": "20",
+      "C": "40",
+      "D": "70",
+      "E": "50"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Kamu memilih software open source karena…",
-    "opsiA": "Mahal",
-    "opsiB": "Bisa dimodifikasi",
-    "opsiC": "Terbatas",
-    "opsiD": "Tidak berguna",
-    "jawaban": "Bisa dimodifikasi",
-    "level": "high"
+    "id": "soal-103",
+    "pertanyaan": "Mengapa binary search harus menggunakan data yang sudah terurut?",
+    "opsiA": "Agar semua data dapat dihapus",
+    "opsiB": "Agar data dapat dibagi menjadi bagian yang tepat saat pencarian",
+    "opsiC": "Agar pencarian selalu dimulai dari data terakhir",
+    "opsiD": "Agar data berubah menjadi angka",
+    "opsiE": "Agar proses iterasi berjalan tanpa henti",
+    "jawaban": "Agar data dapat dibagi menjadi bagian yang tepat saat pencarian",
+    "level": "middle",
+    "opsi": {
+      "A": "Agar semua data dapat dihapus",
+      "B": "Agar data dapat dibagi menjadi bagian yang tepat saat pencarian",
+      "C": "Agar pencarian selalu dimulai dari data terakhir",
+      "D": "Agar data berubah menjadi angka",
+      "E": "Agar proses iterasi berjalan tanpa henti"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Jika jaringan lambat, solusi…",
-    "opsiA": "Ganti CPU",
-    "opsiB": "Perbaiki koneksi",
-    "opsiC": "Ganti RAM",
-    "opsiD": "Ganti keyboard",
-    "jawaban": "Perbaiki koneksi",
-    "level": "high"
+    "id": "soal-104",
+    "pertanyaan": "Perhatikan data berikut:\n30, 10, 20\nJika menggunakan bubble sort secara ascending, pasangan data pertama yang dibandingkan adalah ....",
+    "opsiA": "30 dan 10",
+    "opsiB": "10 dan 20",
+    "opsiC": "30 dan 20",
+    "opsiD": "20 dan 30",
+    "opsiE": "10 dan 30",
+    "jawaban": "30 dan 10",
+    "level": "middle",
+    "opsi": {
+      "A": "30 dan 10",
+      "B": "10 dan 20",
+      "C": "30 dan 20",
+      "D": "20 dan 30",
+      "E": "10 dan 30"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Perangkat paling penting untuk desain grafis…",
-    "opsiA": "Mouse",
-    "opsiB": "GPU & RAM",
-    "opsiC": "Speaker",
-    "opsiD": "Printer",
-    "jawaban": "GPU & RAM",
-    "level": "high"
+    "id": "soal-105",
+    "pertanyaan": "Pada selection sort, proses utama yang dilakukan adalah ....",
+    "opsiA": "Mencari data secara acak",
+    "opsiB": "Mencari nilai terkecil atau terbesar dan menempatkannya pada posisi yang sesuai",
+    "opsiC": "Membagi data menjadi dua tanpa membandingkan",
+    "opsiD": "Menghapus data yang tidak sesuai",
+    "opsiE": "Menukar posisi data secara konstan dari awal sampai akhir",
+    "jawaban": "Mencari nilai terkecil atau terbesar dan menempatkannya pada posisi yang sesuai",
+    "level": "middle",
+    "opsi": {
+      "A": "Mencari data secara acak",
+      "B": "Mencari nilai terkecil atau terbesar dan menempatkannya pada posisi yang sesuai",
+      "C": "Membagi data menjadi dua tanpa membandingkan",
+      "D": "Menghapus data yang tidak sesuai",
+      "E": "Menukar posisi data secara konstan dari awal sampai akhir"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Mana lebih hemat?",
-    "opsiA": "Beli mahal tanpa kebutuhan",
-    "opsiB": "Sesuai kebutuhan",
-    "opsiC": "Termahal",
-    "opsiD": "Terbesar",
-    "jawaban": "Sesuai kebutuhan",
-    "level": "high"
+    "id": "soal-106",
+    "pertanyaan": "Algoritma insertion sort bekerja dengan cara ....",
+    "opsiA": "Membandingkan seluruh data sekaligus",
+    "opsiB": "Memasukkan data ke posisi yang tepat pada bagian yang sudah terurut",
+    "opsiC": "Mencari data dari bagian tengah",
+    "opsiD": "Menghapus data yang tidak sesuai",
+    "opsiE": "Mengacak data sebelum disusun",
+    "jawaban": "Memasukkan data ke posisi yang tepat pada bagian yang sudah terurut",
+    "level": "middle",
+    "opsi": {
+      "A": "Membandingkan seluruh data sekaligus",
+      "B": "Memasukkan data ke posisi yang tepat pada bagian yang sudah terurut",
+      "C": "Mencari data dari bagian tengah",
+      "D": "Menghapus data yang tidak sesuai",
+      "E": "Mengacak data sebelum disusun"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Jika ingin multitasking…",
-    "opsiA": "RAM besar",
-    "opsiB": "RAM kecil",
-    "opsiC": "Storage kecil",
-    "opsiD": "CPU lama",
-    "jawaban": "RAM besar",
-    "level": "high"
+    "id": "soal-107",
+    "pertanyaan": "Seorang siswa ingin menjelaskan proses menghitung luas persegi panjang menggunakan simbol dan arah panah agar alurnya mudah dipahami. Bentuk algoritma yang paling sesuai adalah ....",
+    "opsiA": "Flowchart",
+    "opsiB": "Sorting",
+    "opsiC": "Searching",
+    "opsiD": "Database",
+    "opsiE": "Pseudocode",
+    "jawaban": "Flowchart",
+    "level": "middle",
+    "opsi": {
+      "A": "Flowchart",
+      "B": "Sorting",
+      "C": "Searching",
+      "D": "Database",
+      "E": "Pseudocode"
+    },
+    "kategori": "middle"
   },
   {
-    "pertanyaan": "Pilih laptop terbaik untuk pelajar…",
-    "opsiA": "Mahal",
-    "opsiB": "Sesuai kebutuhan",
-    "opsiC": "Gaming",
-    "opsiD": "Server",
-    "jawaban": "Sesuai kebutuhan",
-    "level": "high"
+    "id": "soal-108",
+    "pertanyaan": "Sebuah sekolah memiliki 2.000 data nomor peserta ujian yang sudah diurutkan dari nomor terkecil hingga terbesar. Guru ingin mencari satu nomor peserta tertentu. Algoritma yang paling tepat digunakan adalah ....",
+    "opsiA": "Bubble sort",
+    "opsiB": "Binary search",
+    "opsiC": "Insertion sort",
+    "opsiD": "Selection sort",
+    "opsiE": "Sequential search",
+    "jawaban": "Binary search",
+    "level": "high",
+    "opsi": {
+      "A": "Bubble sort",
+      "B": "Binary search",
+      "C": "Insertion sort",
+      "D": "Selection sort",
+      "E": "Sequential search"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Sistem biner penting karena…",
-    "opsiA": "Rumit",
-    "opsiB": "Dasar komputer",
-    "opsiC": "Tidak penting",
-    "opsiD": "Sulit",
-    "jawaban": "Dasar komputer",
-    "level": "high"
+    "id": "soal-109",
+    "pertanyaan": "Seorang guru memiliki data nilai siswa yang belum terurut dan ingin mengetahui apakah nilai 85 terdapat dalam data tersebut. Algoritma pencarian yang paling tepat digunakan adalah ....",
+    "opsiA": "Binary search",
+    "opsiB": "Sequential search",
+    "opsiC": "Selection sort",
+    "opsiD": "Insertion sort",
+    "opsiE": "Bubble sort",
+    "jawaban": "Sequential search",
+    "level": "high",
+    "opsi": {
+      "A": "Binary search",
+      "B": "Sequential search",
+      "C": "Selection sort",
+      "D": "Insertion sort",
+      "E": "Bubble sort"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Jika file besar, solusi transfer…",
-    "opsiA": "Bluetooth",
-    "opsiB": "Wi-Fi",
-    "opsiC": "Kabel cepat",
-    "opsiD": "Semua benar",
-    "jawaban": "Semua benar",
-    "level": "high"
+    "id": "soal-110",
+    "pertanyaan": "Perhatikan dua kondisi berikut.\nKondisi 1: Data berjumlah sedikit dan belum terurut.\nKondisi 2: Data berjumlah sangat banyak dan sudah terurut.\nPasangan algoritma pencarian yang paling sesuai adalah ....",
+    "opsiA": "Binary search untuk kondisi 1 dan sequential search untuk kondisi 2",
+    "opsiB": "Sequential search untuk kondisi 1 dan binary search untuk kondisi 2",
+    "opsiC": "Bubble sort untuk kondisi 1 dan binary search untuk kondisi 2",
+    "opsiD": "Selection sort untuk kedua kondisi",
+    "opsiE": "Sequential search untuk kedua kondisi",
+    "jawaban": "Sequential search untuk kondisi 1 dan binary search untuk kondisi 2",
+    "level": "high",
+    "opsi": {
+      "A": "Binary search untuk kondisi 1 dan sequential search untuk kondisi 2",
+      "B": "Sequential search untuk kondisi 1 dan binary search untuk kondisi 2",
+      "C": "Bubble sort untuk kondisi 1 dan binary search untuk kondisi 2",
+      "D": "Selection sort untuk kedua kondisi",
+      "E": "Sequential search untuk kedua kondisi"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Mana lebih cepat?",
-    "opsiA": "HDD",
-    "opsiB": "SSD",
-    "opsiC": "Flashdisk",
-    "opsiD": "CD",
-    "jawaban": "SSD",
-    "level": "high"
+    "id": "soal-111",
+    "pertanyaan": "Seorang siswa ingin mengurutkan data nilai:\n75, 60, 90, 65, 80\ndari nilai terkecil ke terbesar. Ia memilih algoritma yang mencari nilai terkecil kemudian menempatkannya di posisi pertama dan mengulangi proses tersebut. Algoritma yang digunakan adalah ....",
+    "opsiA": "Bubble sort",
+    "opsiB": "Selection sort",
+    "opsiC": "Binary search",
+    "opsiD": "Sequential search",
+    "opsiE": "Insertion sort",
+    "jawaban": "Selection sort",
+    "level": "high",
+    "opsi": {
+      "A": "Bubble sort",
+      "B": "Selection sort",
+      "C": "Binary search",
+      "D": "Sequential search",
+      "E": "Insertion sort"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Jika software tidak kompatibel…",
-    "opsiA": "Bisa jalan",
-    "opsiB": "Tidak berjalan",
-    "opsiC": "Lebih cepat",
-    "opsiD": "Lebih murah",
-    "jawaban": "Tidak berjalan",
-    "level": "high"
+    "id": "soal-112",
+    "pertanyaan": "Sebuah perpustakaan memiliki ribuan buku dengan kode yang sudah tersusun secara berurutan. Petugas ingin menemukan buku dengan kode tertentu dengan cepat. Strategi yang paling tepat adalah ....",
+    "opsiA": "Memeriksa buku satu per satu tanpa memperhatikan urutan",
+    "opsiB": "Mengacak seluruh kode buku",
+    "opsiC": "Menggunakan binary search karena data sudah terurut",
+    "opsiD": "Menggunakan bubble sort sebelum setiap pencarian",
+    "opsiE": "Mengabaikan kode dan mencari secara visual",
+    "jawaban": "Menggunakan binary search karena data sudah terurut",
+    "level": "high",
+    "opsi": {
+      "A": "Memeriksa buku satu per satu tanpa memperhatikan urutan",
+      "B": "Mengacak seluruh kode buku",
+      "C": "Menggunakan binary search karena data sudah terurut",
+      "D": "Menggunakan bubble sort sebelum setiap pencarian",
+      "E": "Mengabaikan kode dan mencari secara visual"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Jika OS rusak…",
-    "opsiA": "Komputer normal",
-    "opsiB": "Tidak bisa digunakan",
-    "opsiC": "Lebih cepat",
-    "opsiD": "Lebih ringan",
-    "jawaban": "Tidak bisa digunakan",
-    "level": "high"
+    "id": "soal-113",
+    "pertanyaan": "Seorang siswa menggunakan binary search untuk mencari nama pada daftar yang belum diurutkan, tetapi hasil pencariannya tidak tepat. Analisis yang paling tepat adalah ....",
+    "opsiA": "Binary search hanya dapat digunakan untuk angka",
+    "opsiB": "Binary search tidak membutuhkan data terurut",
+    "opsiC": "Data perlu diurutkan terlebih dahulu agar binary search dapat digunakan dengan benar",
+    "opsiD": "Binary search hanya dapat digunakan untuk data yang sedikit",
+    "opsiE": "Pencarian biner gagal karena tipe data teks tidak didukung",
+    "jawaban": "Data perlu diurutkan terlebih dahulu agar binary search dapat digunakan dengan benar",
+    "level": "high",
+    "opsi": {
+      "A": "Binary search hanya dapat digunakan untuk angka",
+      "B": "Binary search tidak membutuhkan data terurut",
+      "C": "Data perlu diurutkan terlebih dahulu agar binary search dapat digunakan dengan benar",
+      "D": "Binary search hanya dapat digunakan untuk data yang sedikit",
+      "E": "Pencarian biner gagal karena tipe data teks tidak didukung"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Pilihan terbaik untuk kerja kantor…",
-    "opsiA": "Gaming PC",
-    "opsiB": "PC standar",
-    "opsiC": "Server",
-    "opsiD": "Supercomputer",
-    "jawaban": "PC standar",
-    "level": "high"
+    "id": "soal-114",
+    "pertanyaan": "Rina ingin membuat program untuk menentukan nilai tertinggi dari lima nilai ujian. Ia menyusun langkah dengan membandingkan nilai satu per satu sampai mendapatkan nilai terbesar. Tahapan berpikir komputasional yang paling terlihat adalah ....",
+    "opsiA": "Abstraksi",
+    "opsiB": "Algoritma",
+    "opsiC": "Pengenalan pola",
+    "opsiD": "Dekomposisi",
+    "opsiE": "Evaluasi sistem",
+    "jawaban": "Algoritma",
+    "level": "high",
+    "opsi": {
+      "A": "Abstraksi",
+      "B": "Algoritma",
+      "C": "Pengenalan pola",
+      "D": "Dekomposisi",
+      "E": "Evaluasi sistem"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Mana lebih aman?",
-    "opsiA": "Software bajakan",
-    "opsiB": "Software resmi",
-    "opsiC": "Tanpa software",
-    "opsiD": "Tidak pakai OS",
-    "jawaban": "Software resmi",
-    "level": "high"
+    "id": "soal-115",
+    "pertanyaan": "Seorang siswa memilih bubble sort untuk mengurutkan data karena jumlah datanya sedikit dan ia membutuhkan algoritma yang sederhana untuk dipahami. Keputusan tersebut menunjukkan bahwa ....",
+    "opsiA": "Semua masalah harus menggunakan bubble sort",
+    "opsiB": "Pemilihan algoritma harus disesuaikan dengan kondisi dan kebutuhan masalah",
+    "opsiC": "Algoritma yang rumit selalu lebih baik",
+    "opsiD": "Binary search harus digunakan untuk semua data",
+    "opsiE": "Jumlah data tidak memengaruhi efisiensi algoritma",
+    "jawaban": "Pemilihan algoritma harus disesuaikan dengan kondisi dan kebutuhan masalah",
+    "level": "high",
+    "opsi": {
+      "A": "Semua masalah harus menggunakan bubble sort",
+      "B": "Pemilihan algoritma harus disesuaikan dengan kondisi dan kebutuhan masalah",
+      "C": "Algoritma yang rumit selalu lebih baik",
+      "D": "Binary search harus digunakan untuk semua data",
+      "E": "Jumlah data tidak memengaruhi efisiensi algoritma"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Jika ingin hemat listrik…",
-    "opsiA": "PC besar",
-    "opsiB": "Laptop",
-    "opsiC": "Server",
-    "opsiD": "GPU besar",
-    "jawaban": "Laptop",
-    "level": "high"
+    "id": "soal-116",
+    "pertanyaan": "Sebuah sistem perpustakaan harus dapat mencari buku berdasarkan judul dan menyusun daftar buku berdasarkan urutan abjad. Algoritma yang diperlukan adalah ....",
+    "opsiA": "Hanya searching",
+    "opsiB": "Hanya sorting",
+    "opsiC": "Searching dan sorting",
+    "opsiD": "Hanya flowchart",
+    "opsiE": "Hanya pseudocode",
+    "jawaban": "Searching dan sorting",
+    "level": "high",
+    "opsi": {
+      "A": "Hanya searching",
+      "B": "Hanya sorting",
+      "C": "Searching dan sorting",
+      "D": "Hanya flowchart",
+      "E": "Hanya pseudocode"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Pilih jaringan terbaik untuk rumah…",
-    "opsiA": "Bluetooth",
-    "opsiB": "Wi-Fi",
-    "opsiC": "Kabel saja",
-    "opsiD": "Infrared",
-    "jawaban": "Wi-Fi",
-    "level": "high"
+    "id": "soal-117",
+    "pertanyaan": "Perhatikan langkah berikut:\n1. Membagi masalah menjadi beberapa bagian.\n2. Menemukan pola dari bagian-bagian tersebut.\n3. Memilih informasi yang penting.\n4. Menyusun langkah penyelesaian.\nUrutan tahapan berpikir komputasional yang tepat adalah ....",
+    "opsiA": "Abstraksi → dekomposisi → pengenalan pola → algoritma",
+    "opsiB": "Dekomposisi → pengenalan pola → abstraksi → algoritma",
+    "opsiC": "Algoritma → abstraksi → pengenalan pola → dekomposisi",
+    "opsiD": "Pengenalan pola → algoritma → abstraksi → dekomposisi",
+    "opsiE": "Dekomposisi → abstraksi → pengenalan pola → algoritma",
+    "jawaban": "Dekomposisi → pengenalan pola → abstraksi → algoritma",
+    "level": "high",
+    "opsi": {
+      "A": "Abstraksi → dekomposisi → pengenalan pola → algoritma",
+      "B": "Dekomposisi → pengenalan pola → abstraksi → algoritma",
+      "C": "Algoritma → abstraksi → pengenalan pola → dekomposisi",
+      "D": "Pengenalan pola → algoritma → abstraksi → dekomposisi",
+      "E": "Dekomposisi → abstraksi → pengenalan pola → algoritma"
+    },
+    "kategori": "high"
   },
   {
-    "pertanyaan": "Jika data penting, harus…",
-    "opsiA": "Dihapus",
-    "opsiB": "Disimpan & backup",
-    "opsiC": "Dibuka",
-    "opsiD": "Diedit",
-    "jawaban": "Disimpan & backup",
-    "level": "high"
+    "id": "soal-1791629955103",
+    "pertanyaan": "aaaaaaaaaaaa",
+    "opsiA": "a",
+    "opsiB": "c",
+    "opsiC": "op",
+    "opsiD": "v",
+    "opsiE": "b",
+    "opsi": {
+      "A": "a",
+      "B": "c",
+      "C": "op",
+      "D": "v",
+      "E": "b"
+    },
+    "jawaban": "op",
+    "level": "Jaringan nirkabel",
+    "kategori": "Jaringan nirkabel"
   },
   {
-    "pertanyaan": "Mana lebih fleksibel?",
-    "opsiA": "Closed source",
-    "opsiB": "Open source",
-    "opsiC": "Tidak ada",
-    "opsiD": "Semua sama",
-    "jawaban": "Open source",
-    "level": "high"
+    "id": "soal-1791645625529",
+    "pertanyaan": "dafs",
+    "opsiA": "fd",
+    "opsiB": "aa",
+    "opsiC": "sx",
+    "opsiD": "xx",
+    "opsiE": "zz",
+    "opsi": {
+      "A": "fd",
+      "B": "aa",
+      "C": "sx",
+      "D": "xx",
+      "E": "zz"
+    },
+    "jawaban": "fd",
+    "level": "Jaringan nirkabel",
+    "kategori": "Jaringan nirkabel"
   },
   {
-    "pertanyaan": "Jika komputer mati mendadak…",
-    "opsiA": "Normal",
-    "opsiB": "Ada masalah",
-    "opsiC": "Cepat",
-    "opsiD": "Aman",
-    "jawaban": "Ada masalah",
-    "level": "high"
+    "id": "soal-1791651976548",
+    "pertanyaan": "qAAA",
+    "opsiA": "Xmm",
+    "opsiB": "X11",
+    "opsiC": "Xwsaxx",
+    "opsiD": "S11",
+    "opsiE": "S22",
+    "opsi": {
+      "A": "Xmm",
+      "B": "X11",
+      "C": "Xwsaxx",
+      "D": "S11",
+      "E": "S22"
+    },
+    "jawaban": "Xmm",
+    "level": "web",
+    "kategori": "web"
   },
   {
-    "pertanyaan": "Pilihan terbaik untuk belajar coding…",
-    "opsiA": "HP lama",
-    "opsiB": "Laptop standar",
-    "opsiC": "Server",
-    "opsiD": "Supercomputer",
-    "jawaban": "Laptop standar",
-    "level": "high"
-  },
-  {
-    "pertanyaan": "Mana lebih efisien?",
-    "opsiA": "Manual",
-    "opsiB": "Otomatis",
-    "opsiC": "Lambat",
-    "opsiD": "Rumit",
-    "jawaban": "Otomatis",
-    "level": "high"
-  },
-  {
-    "pertanyaan": "Jika ingin performa tinggi…",
-    "opsiA": "RAM kecil",
-    "opsiB": "CPU cepat",
-    "opsiC": "Storage kecil",
-    "opsiD": "Tanpa GPU",
-    "jawaban": "CPU cepat",
-    "level": "high"
-  },
-  {
-    "pertanyaan": "Mana lebih baik?",
-    "opsiA": "Tidak sesuai kebutuhan",
-    "opsiB": "Sesuai kebutuhan",
-    "opsiC": "Mahal",
-    "opsiD": "Murah saja",
-    "jawaban": "Sesuai kebutuhan",
-    "level": "high"
-  },
-  {
-    "pertanyaan": "Kesimpulan sistem komputer…",
-    "opsiA": "Tidak penting",
-    "opsiB": "Membantu manusia",
-    "opsiC": "Sulit",
-    "opsiD": "Mahal",
-    "jawaban": "Membantu manusia",
-    "level": "high"
-  },
-  {
-    "pertanyaan": "apa warna bendera indonesia",
-    "opsiA": "merah putih",
-    "opsiB": "hijau",
-    "opsiC": "biru",
-    "opsiD": "kuning",
-    "jawaban": "merah putih",
-    "level": "ulangan harian"
-  },
-  {
-    "pertanyaan": "dhila itu",
-    "opsiA": "cantik",
-    "opsiB": "cantik banget",
-    "opsiC": "cantik banget banget",
-    "opsiD": "cantik aja",
-    "jawaban": "cantik banget banget",
-    "level": "ulangan harian"
-  },
-  {
-    "pertanyaan": "apa warna apel",
-    "opsiA": "merah",
-    "opsiB": "putih",
-    "opsiC": "hitam",
-    "opsiD": "biru",
-    "jawaban": "merah",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "sapi makan apa",
-    "opsiA": "rumput",
-    "opsiB": "pisang",
-    "opsiC": "daging",
-    "opsiD": "Mouse",
-    "jawaban": "rumput",
-    "level": "low"
-  },
-  {
-    "pertanyaan": "pitul",
-    "opsiA": "jelek",
-    "opsiB": "jelleki",
-    "opsiC": "jelekkk",
-    "opsiD": "poll",
-    "jawaban": "jelekkk",
-    "level": "low"
+    "id": "soal-1791652002305",
+    "pertanyaan": "ZZZZZZZZZ",
+    "opsiA": "2",
+    "opsiB": "23",
+    "opsiC": "22",
+    "opsiD": "00",
+    "opsiE": "11",
+    "opsi": {
+      "A": "2",
+      "B": "23",
+      "C": "22",
+      "D": "00",
+      "E": "11"
+    },
+    "jawaban": "00",
+    "level": "web",
+    "kategori": "web"
   }
 ]

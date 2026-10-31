@@ -6,31 +6,86 @@
   <title>Dashboard - TarikCerdas</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  
   <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .theme-switch-wrapper,
+    .role-switch-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      cursor: pointer;
+    }
+    .form-check-input:checked {
+      background-color: var(--accent-pink);
+      border-color: var(--accent-pink);
+    }
+    /* Style Fallback Tampilan Kategori Tambahan / Custom */
+    .class-card.btn-custom-category {
+      background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+      box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .class-card.btn-custom-category:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 25px rgba(108, 92, 231, 0.6);
+    }
+  </style>
 </head>
 <body>
 
+  <!-- TOP NAV & DROPDOWN SETTING -->
   <div class="top-nav">
     <div class="dropdown">
       <button class="icon-btn-dropdown" type="button" id="settingMenu" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="bi bi-gear-fill"></i>
       </button>
       <ul class="dropdown-menu dropdown-menu-dark custom-dropdown" aria-labelledby="settingMenu">
-        <li>
+        <!-- EDIT PROFILE (HANYA UNTUK GURU) -->
+        <li class="guru-only-item">
           <a class="dropdown-item" href="/edit-profile">
             <i class="bi bi-pencil-square me-2"></i> Edit Profile
           </a>
         </li>
-        <li>
+        <!-- TAMBAHKAN KATEGORI (HANYA UNTUK GURU) -->
+        <li class="guru-only-item">
           <a class="dropdown-item" href="/tambah-kategori">
             <i class="bi bi-plus-circle me-2"></i> Tambahkan Kategori
           </a>
         </li>
+        <li class="guru-only-item"><hr class="dropdown-divider"></li>
+        
+        <!-- FITUR TOGGLE MODE PERAN (GURU / SISWA) -->
+        <li>
+          <div class="dropdown-item role-switch-wrapper">
+            <span class="role-label" id="roleLabel">
+              <i class="bi bi-person-badge-fill me-2 text-warning"></i> Mode Guru
+            </span>
+            <label class="form-check form-switch m-0 p-0">
+              <input class="form-check-input" type="checkbox" id="roleToggle">
+            </label>
+          </div>
+        </li>
+
+        <li><hr class="dropdown-divider"></li>
+
+        <!-- FITUR TOGGLE MODE TERANG / GELAP -->
+        <li>
+          <div class="dropdown-item theme-switch-wrapper">
+            <span class="theme-label" id="themeLabel">
+              <i class="bi bi-moon-stars-fill me-2 text-info"></i> Mode Gelap
+            </span>
+            <label class="form-check form-switch m-0 p-0">
+              <input class="form-check-input theme-toggle-checkbox" type="checkbox" id="themeToggle">
+            </label>
+          </div>
+        </li>
+
         <li><hr class="dropdown-divider"></li>
         <li>
           <a class="dropdown-item text-danger" href="/logout">
@@ -41,41 +96,124 @@
     </div>
   </div>
 
+  <!-- DASHBOARD WRAPPER -->
   <div class="dashboard-wrapper">
     <div class="brand-name">Tarik<span>Cerdas</span></div>
     <h1 class="dashboard-title">Dashboard</h1>
     <p class="subtitle">Silakan pilih kelas untuk memulai tantangan</p>
 
     <div class="class-container" id="classContainer">
-      <a href="/low" class="class-card"> low
-     <img src="https://img.icons8.com/papercut/100/open-book.png" class="card-icon" alt="icon">
-     </a>
-
-      <a href="/middle" class="class-card">
-        middle
+      <a href="/low" class="class-card btn-low"> low
+        <img src="https://img.icons8.com/papercut/100/open-book.png" class="card-icon" alt="icon">
       </a>
-
-      <a href="/high" class="class-card">
-        high
-      </a>
+      <a href="/middle" class="class-card btn-middle"> middle </a>
+      <a href="/high" class="class-card btn-high"> high </a>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Load custom kategori dari localStorage dan tampilkan di dashboard
     document.addEventListener('DOMContentLoaded', function() {
-      const customKategoriList = JSON.parse(localStorage.getItem('customKategori')) || [];
       const classContainer = document.getElementById('classContainer');
-      
-      // Tambahkan tombol untuk setiap custom kategori
-      customKategoriList.forEach(kategori => {
-        const card = document.createElement('a');
-        card.href = `/category/${encodeURIComponent(kategori)}`;
-        card.className = 'class-card';
-        card.textContent = kategori;
-        classContainer.appendChild(card);
+
+      // 1. Muat Kategori dari Database (Kategori Spesifik milik User yang Login)
+      async function loadUserCategories() {
+        try {
+          const res = await fetch('/api/categories');
+          if (res.ok) {
+            const categories = await res.json();
+
+            if (Array.isArray(categories) && categories.length > 0) {
+              classContainer.innerHTML = '';
+
+              categories.forEach(cat => {
+                const card = document.createElement('a');
+                const catName = cat.name.toLowerCase();
+                const isDefault = ['low', 'middle', 'high'].includes(catName);
+                
+                // Atur Href Link Kategori
+                card.href = isDefault ? `/${catName}` : `/category/${encodeURIComponent(cat.name)}`;
+                
+                // Atur CSS Class
+                if (isDefault) {
+                  card.className = `class-card btn-${catName}`;
+                } else {
+                  card.className = `class-card btn-custom-category`;
+                }
+                
+                // Atur Konten Kartu
+                if (catName === 'low') {
+                  card.innerHTML = `${cat.name.toUpperCase()} <img src="https://img.icons8.com/papercut/100/open-book.png" class="card-icon" alt="icon">`;
+                } else {
+                  card.textContent = cat.name.toUpperCase();
+                }
+                
+                classContainer.appendChild(card);
+              });
+            }
+          }
+        } catch (err) {
+          console.error('Gagal memuat kategori dari server:', err);
+        }
+      }
+
+      // Panggil Fungsi Pemuatan Kategori
+      loadUserCategories();
+
+      // 2. Logika Switch Peran (Guru / Siswa)
+      const roleToggle = document.getElementById('roleToggle');
+      const roleLabel = document.getElementById('roleLabel');
+      const savedRole = localStorage.getItem('userRole') || 'guru';
+
+      function applyRole(role) {
+        const guruOnlyItems = document.querySelectorAll('.guru-only-item');
+        if (role === 'siswa') {
+          roleToggle.checked = true;
+          roleLabel.innerHTML = '<i class="bi bi-mortarboard-fill me-2 text-primary"></i> Mode Siswa';
+          guruOnlyItems.forEach(item => item.style.setProperty('display', 'none', 'important'));
+        } else {
+          roleToggle.checked = false;
+          roleLabel.innerHTML = '<i class="bi bi-person-badge-fill me-2 text-warning"></i> Mode Guru';
+          guruOnlyItems.forEach(item => item.style.removeProperty('display'));
+        }
+      }
+
+      applyRole(savedRole);
+
+      roleToggle.addEventListener('change', function() {
+        const newRole = this.checked ? 'siswa' : 'guru';
+        localStorage.setItem('userRole', newRole);
+        applyRole(newRole);
+      });
+
+      // 3. Logika Switch Mode Terang / Gelap
+      const themeToggle = document.getElementById('themeToggle');
+      const themeLabel = document.getElementById('themeLabel');
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+
+      function applyTheme(theme) {
+        if (theme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+          document.body.setAttribute('data-theme', 'light');
+          themeToggle.checked = true;
+          themeLabel.innerHTML = '<i class="bi bi-sun-fill me-2 text-warning"></i> Mode Terang';
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          document.body.removeAttribute('data-theme');
+          themeToggle.checked = false;
+          themeLabel.innerHTML = '<i class="bi bi-moon-stars-fill me-2 text-info"></i> Mode Gelap';
+        }
+      }
+
+      applyTheme(savedTheme);
+
+      themeToggle.addEventListener('change', function() {
+        const newTheme = this.checked ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
       });
     });
   </script>
+</body>
+</html>

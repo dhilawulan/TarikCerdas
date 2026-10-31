@@ -1,17 +1,22 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const express = require('express');
+const router = express.Router();
+const Soal = require('../models/soal'); // Import model yang baru kamu buat
 
-const Soal = sequelize.define('Soal', {
-    pertanyaan: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    opsiA: DataTypes.STRING,
-    opsiB: DataTypes.STRING,
-    opsiC: DataTypes.STRING,
-    opsiD: DataTypes.STRING,
-    jawaban: DataTypes.STRING,
-    level: DataTypes.STRING // low, middle, high
+// GET /api/soal?level=low
+router.get('/soal', async (req, res) => {
+    try {
+        const level = req.query.level || 'low';
+
+        // Ambil data soal dari tabel database berdasarkan level
+        const dataSoal = await Soal.findAll({
+            where: { level: level }
+        });
+
+        res.json(dataSoal);
+    } catch (error) {
+        console.error('Gagal mengambil soal dari database:', error);
+        res.status(500).json({ error: 'Gagal mengambil data soal dari database' });
+    }
 });
 
-module.exports = Soal;
+module.exports = router;

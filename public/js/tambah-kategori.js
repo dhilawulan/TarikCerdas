@@ -1,139 +1,136 @@
-const baseKategori = ['low', 'middle', 'high'];
-let customKategoriList = JSON.parse(localStorage.getItem('customKategori')) || [];
-let selectedKategori = 'low';
+document.addEventListener('DOMContentLoaded', function() {
+    const newCategoryInput = document.getElementById('newCategoryInput');
+    const addCategoryBtn = document.getElementById('addCategoryBtn');
+    const categoryTagList = document.getElementById('categoryTagList');
+    const saveCategoriesBtn = document.getElementById('saveCategoriesBtn');
+    const clearCategoriesBtn = document.getElementById('clearCategoriesBtn');
+    const selectedTabLabel = document.getElementById('selectedTabLabel');
 
-function getAllKategori() {
-    return [...baseKategori, ...customKategoriList];
-}
+    // 1. Ambil kategori kustom milik akun yang sedang login
+    let savedCategories = [];
 
-function capitalizeLabel(kategori) {
-    return kategori.charAt(0).toUpperCase() + kategori.slice(1);
-}
-
-function renderTabs() {
-    const tabsContainer = document.getElementById('kategoriTabs');
-    tabsContainer.innerHTML = '';
-
-    getAllKategori().forEach(kategori => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'kategori-tab' + (kategori === selectedKategori ? ' active' : '');
-        button.textContent = kategori === kategori.toLowerCase() ? capitalizeLabel(kategori) : kategori;
-        button.dataset.kategori = kategori;
-        button.addEventListener('click', () => {
-            selectedKategori = kategori;
-            renderTabs();
-            updateSelectedLabel();
-        });
-        tabsContainer.appendChild(button);
-    });
-}
-
-function updateSelectedLabel() {
-    const label = document.getElementById('selectedTabLabel');
-    label.textContent = selectedKategori ? (selectedKategori === selectedKategori.toLowerCase() ? capitalizeLabel(selectedKategori) : selectedKategori) : 'Pilih Kategori';
-}
-
-function saveCategories() {
-    localStorage.setItem('customKategori', JSON.stringify(customKategoriList));
-}
-
-function renderKategoriList() {
-    const list = document.getElementById('categoryTagList');
-    list.innerHTML = '';
-
-    if (customKategoriList.length === 0) {
-        const empty = document.createElement('p');
-        empty.className = 'empty-message';
-        empty.textContent = 'Belum ada kategori tambahan.';
-        list.appendChild(empty);
-        return;
-    }
-
-    customKategoriList.forEach(kategori => {
-        const chip = document.createElement('div');
-        chip.className = 'category-chip';
-        chip.innerHTML = `<span>${kategori}</span><button type="button" class="remove-chip" data-kategori="${kategori}">✕</button>`;
-
-        chip.addEventListener('click', (event) => {
-            if (event.target.classList.contains('remove-chip')) return;
-            selectKategori(kategori);
-        });
-
-        chip.querySelector('.remove-chip').addEventListener('click', (event) => {
-            event.stopPropagation();
-            customKategoriList = customKategoriList.filter(k => k !== kategori);
-            if (selectedKategori === kategori) {
-                selectedKategori = 'low';
+    // Fungsi untuk memperbarui tampilan daftar tag kategori
+    function renderCategoryTags() {
+        if (!categoryTagList) return;
+        
+        categoryTagList.innerHTML = '';
+        if (savedCategories.length === 0) {
+            if (selectedTabLabel) {
+                selectedTabLabel.textContent = 'Belum ada kategori baru yang ditambahkan';
             }
-            saveCategories();
-            renderTabs();
-            renderKategoriList();
-            updateSelectedLabel();
-        });
-        list.appendChild(chip);
-    });
-}
-
-function selectKategori(kategori) {
-    selectedKategori = kategori;
-    renderTabs();
-    updateSelectedLabel();
-}
-
-function addCategory() {
-    const input = document.getElementById('newCategoryInput');
-    const name = input.value.trim();
-
-    if (!name) {
-        alert('Masukkan nama kategori baru...');
-        return;
-    }
-
-    const existing = getAllKategori().find(k => k.toLowerCase() === name.toLowerCase());
-    if (existing) {
-        alert('Kategori ini sudah ada.');
-        input.value = '';
-        return;
-    }
-
-    customKategoriList.push(name);
-    saveCategories();
-    renderTabs();
-    renderKategoriList();
-    selectKategori(name);
-    input.value = '';
-}
-
-function clearAllCategories() {
-    if (!customKategoriList.length) return;
-    if (!confirm('Hapus semua kategori tambahan?')) return;
-    customKategoriList = [];
-    saveCategories();
-    selectedKategori = 'low';
-    renderTabs();
-    renderKategoriList();
-    updateSelectedLabel();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    renderTabs();
-    renderKategoriList();
-    updateSelectedLabel();
-
-    document.getElementById('addCategoryBtn').addEventListener('click', addCategory);
-    document.getElementById('saveCategoriesBtn').addEventListener('click', () => {
-        saveCategories();
-        alert('Kategori disimpan.');
-    });
-    document.getElementById('clearCategoriesBtn').addEventListener('click', clearAllCategories);
-    document.getElementById('focusInputBtn').addEventListener('click', () => {
-        document.getElementById('newCategoryInput').focus();
-    });
-    document.getElementById('newCategoryInput').addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            addCategory();
+            return;
         }
-    });
+
+        if (selectedTabLabel) {
+            selectedTabLabel.textContent = savedCategories.join(', ');
+        }
+
+        savedCategories.forEach((cat, index) => {
+            const tag = document.createElement('span');
+            tag.className = 'kategori-tag';
+            tag.style.cssText = 'display: inline-flex; align-items: center; gap: 8px; background: var(--accent-button, #2ec4b6); color: white; padding: 6px 14px; border-radius: 20px; margin: 4px; font-size: 14px;';
+            tag.innerHTML = `
+                ${escapeHtml(cat)}
+                <i class="fas fa-times" data-index="${index}" style="cursor: pointer;" title="Hapus kategori"></i>
+            `;
+            categoryTagList.appendChild(tag);
+        });
+    }
+
+    // Escape string untuk mencegah XSS
+    function escapeHtml(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    fetch('/api/categories')
+        .then(response => {
+            if (!response.ok) throw new Error('Gagal mengambil kategori.');
+            return response.json();
+        })
+        .then(categories => {
+            savedCategories = categories
+                .map(category => category.name)
+                .filter(name => !['low', 'middle', 'high'].includes(name.toLowerCase()));
+            renderCategoryTags();
+        })
+        .catch(error => {
+            console.error('Gagal memuat kategori:', error);
+            alert('Gagal memuat kategori. Silakan muat ulang halaman.');
+        });
+
+    // 2. Tambahkan kategori baru ke daftar temporary
+    if (addCategoryBtn && newCategoryInput) {
+        addCategoryBtn.addEventListener('click', function() {
+            const catName = newCategoryInput.value.trim();
+            if (catName !== '') {
+                // Konversi ke lowercase untuk pencegahan duplikasi sensitif huruf
+                const exists = savedCategories.some(c => c.toLowerCase() === catName.toLowerCase());
+                if (!exists) {
+                    savedCategories.push(catName);
+                    newCategoryInput.value = '';
+                    renderCategoryTags();
+                } else {
+                    alert('Kategori tersebut sudah ada!');
+                }
+            } else {
+                alert('Silakan masukkan nama kategori terlebih dahulu!');
+            }
+        });
+
+        // Jalankan saat menekan tombol Enter pada input
+        newCategoryInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addCategoryBtn.click();
+            }
+        });
+    }
+
+    // 3. Hapus individu tag kategori
+    if (categoryTagList) {
+        categoryTagList.addEventListener('click', function(e) {
+            if (e.target.classList.contains('fa-times')) {
+                const index = e.target.getAttribute('data-index');
+                if (index !== null) {
+                    savedCategories.splice(index, 1);
+                    renderCategoryTags();
+                }
+            }
+        });
+    }
+
+    // 4. Hapus semua kategori baru
+    if (clearCategoriesBtn) {
+        clearCategoriesBtn.addEventListener('click', function() {
+            if (confirm('Apakah Anda yakin ingin menghapus semua kategori tambahan?')) {
+                savedCategories = [];
+                renderCategoryTags();
+            }
+        });
+    }
+
+    // 5. SIMPAN DAN PINDAH OTOMATIS KE DASHBOARD
+    if (saveCategoriesBtn) {
+        saveCategoriesBtn.addEventListener('click', async function() {
+            try {
+                const response = await fetch('/api/categories', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ categories: savedCategories })
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message || 'Gagal menyimpan kategori.');
+                alert('Kategori berhasil disimpan!');
+                window.location.href = '/dashboard';
+            } catch (error) {
+                console.error('Gagal menyimpan kategori:', error);
+                alert(error.message);
+            }
+        });
+    }
 });
